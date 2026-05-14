@@ -1,927 +1,595 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Tubalcain - Your Free Tools Await</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(to bottom right, #f0f9ff, #ffffff, #f0f9ff);
-            color: #111827;
-            line-height: 1.6;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(to right, #2563eb, #1e40af);
-            color: white;
-            padding: 4rem 1.5rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
-
-        .hero-content {
-            max-width: 56rem;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: 2.25rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero .subtitle {
-            font-size: 1.25rem;
-            color: #dbeafe;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero .description {
-            color: #bfdbfe;
-        }
-
-        /* Container */
-        .container {
-            max-width: 56rem;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* Sections */
-        section {
-            padding: 3rem 1.5rem;
-        }
-
-        section h2 {
-            font-size: 1.875rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        /* Timeline */
-        .timeline {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .timeline-item {
-            background: white;
-            border: 2px solid #dbeafe;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            transition: border-color 0.3s;
-        }
-
-        .timeline-item:hover {
-            border-color: #60a5fa;
-        }
-
-        .timeline-item-time {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #2563eb;
-        }
-
-        .timeline-item h3 {
-            font-size: 1.125rem;
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-item p {
-            color: #4b5563;
-            font-size: 0.95rem;
-        }
-
-        /* Video Section */
-        .video-section {
-            background: linear-gradient(to bottom right, #f3e8ff, #f0f9ff);
-            border: 2px solid #d8b4fe;
-            border-radius: 0.75rem;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .video-placeholder {
-            background: white;
-            border: 2px dashed #d8b4fe;
-            border-radius: 0.5rem;
-            padding: 3rem 1rem;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-
-        .video-placeholder-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Tools */
-        .tools {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .tool {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            transition: border-color 0.3s;
-        }
-
-        .tool:hover {
-            border-color: #60a5fa;
-        }
-
-        .tool-header {
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            background: white;
-            border: none;
-            width: 100%;
-            text-align: left;
-            transition: background-color 0.3s;
-        }
-
-        .tool-header:hover {
-            background-color: #f9fafb;
-        }
-
-        .tool-header-left {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex: 1;
-        }
-
-        .tool-icon {
-            font-size: 2.25rem;
-        }
-
-        .tool-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .tool-subtitle {
-            color: #6b7280;
-            font-size: 0.95rem;
-        }
-
-        .tool-toggle {
-            color: #9ca3af;
-            font-size: 1.5rem;
-        }
-
-        .tool-details {
-            display: none;
-            border-top: 2px solid #f3f4f6;
-            padding: 1.5rem;
-            background-color: #f9fafb;
-        }
-
-        .tool-details.open {
-            display: block;
-        }
-
-        .tool-details h4 {
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            margin-top: 1rem;
-        }
-
-        .tool-details h4:first-child {
-            margin-top: 0;
-        }
-
-        .tool-details p {
-            color: #4b5563;
-            margin-bottom: 1rem;
-        }
-
-        .tool-details ol, .tool-details ul {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .tool-details li {
-            color: #4b5563;
-            margin-bottom: 0.5rem;
-        }
-
-        .tool-details-box {
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .tool-details-box.blue {
-            background-color: #eff6ff;
-            border-left: 4px solid #2563eb;
-        }
-
-        .tool-details-box.green {
-            background-color: #f0fdf4;
-            border-left: 4px solid #16a34a;
-        }
-
-        .tool-details-box.purple {
-            background-color: #faf5ff;
-            border-left: 4px solid #a855f7;
-        }
-
-        .tool-action {
-            display: inline-block;
-            background-color: #2563eb;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .tool-action:hover {
-            background-color: #1d4ed8;
-        }
-
-        .tool-action.green {
-            background-color: #16a34a;
-        }
-
-        .tool-action.green:hover {
-            background-color: #15803d;
-        }
-
-        /* Lead Example */
-        .lead-example {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .lead-example h3 {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .lead-data {
-            background-color: #f3f4f6;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
-        }
-
-        .lead-data-section {
-            margin-bottom: 1.5rem;
-        }
-
-        .lead-data-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .lead-data-title {
-            color: #4b5563;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .lead-data-item {
-            color: #374151;
-            margin-bottom: 0.25rem;
-        }
-
-        .lead-data-value {
-            font-weight: 600;
-        }
-
-        .lead-warning {
-            background-color: #fef3c7;
-            border-left: 4px solid #f59e0b;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        /* Response Time Section */
-        .response-section {
-            background-color: #fef2f2;
-            border: 2px solid #fecaca;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-        }
-
-        .response-section h3 {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            color: #dc2626;
-        }
-
-        .response-rates {
-            background: white;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            border-left: 4px solid #dc2626;
-            margin-bottom: 1rem;
-        }
-
-        .response-rates p {
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-
-        .response-rates ul {
-            list-style: none;
-            margin-left: 0;
-        }
-
-        .response-rates li {
-            margin-bottom: 0.5rem;
-            color: #374151;
-        }
-
-        /* Next Steps */
-        .next-steps {
-            background: linear-gradient(to right, #2563eb, #1e40af);
-            color: white;
-            border-radius: 0.5rem;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .next-steps h2 {
-            color: white;
-            margin-bottom: 1.5rem;
-        }
-
-        .next-steps-list {
-            margin-bottom: 2rem;
-        }
-
-        .next-step {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .next-step-number {
-            flex-shrink: 0;
-            width: 2rem;
-            height: 2rem;
-            border-radius: 50%;
-            background-color: #93c5fd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: #1e40af;
-        }
-
-        .next-step-content p {
-            margin: 0;
-        }
-
-        .next-step-content p:first-child {
-            font-weight: 600;
-        }
-
-        .next-step-content p:last-child {
-            color: #dbeafe;
-            font-size: 0.9rem;
-        }
-
-        .contact-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 1rem;
-            border-top: 1px solid #3b82f6;
-            padding-top: 1rem;
-        }
-
-        .contact-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background-color: white;
-            color: #2563eb;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .contact-button:hover {
-            background-color: #f0f9ff;
-        }
-
-        .contact-button.email {
-            background-color: #3b82f6;
-            color: white;
-        }
-
-        .contact-button.email:hover {
-            background-color: #2563eb;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #111827;
-            color: #9ca3af;
-            padding: 2rem 1.5rem;
-            text-align: center;
-        }
-
-        footer p {
-            margin: 0.5rem 0;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 1.875rem;
-            }
-
-            section {
-                padding: 2rem 1rem;
-            }
-
-            section h2 {
-                font-size: 1.5rem;
-            }
-
-            .tool-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .tool-header-left {
-                width: 100%;
-                margin-bottom: 1rem;
-            }
-
-            .tool-toggle {
-                align-self: flex-end;
-                margin-top: -2.5rem;
-            }
-
-            .contact-buttons {
-                flex-direction: column;
-            }
-
-            .contact-button {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're In  Welcome to the Tubalcain System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:     #050D1A;
+  --navy2:    #071525;
+  --navy3:    #0D1F35;
+  --card:     #0A1628;
+  --border:   rgba(21,101,192,0.18);
+  --border2:  rgba(21,101,192,0.10);
+  --blue:     #1565C0;
+  --blue2:    #1976D2;
+  --gold:     #F9A825;
+  --teal:     #0097A7;
+  --white:    #EEF4FF;
+  --grey:     #7B92B2;
+  --muted:    #4A6FA5;
+  --green:    #00C853;
+  --green2:   rgba(0,200,83,0.12);
+  --red:      #EF5350;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body {
+  font-family:'DM Sans',sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── BACKGROUND ── */
+body::before {
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 5% 10%, rgba(21,101,192,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 95% 85%, rgba(249,168,37,0.05) 0%, transparent 50%);
+  pointer-events:none;z-index:0;
+}
+
+.wrap {
+  max-width:760px;
+  margin:0 auto;
+  padding:40px 20px 80px;
+  position:relative;z-index:1;
+}
+
+/* ── HERO ── */
+.hero {
+  text-align:center;
+  padding:56px 32px 48px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  margin-bottom:20px;
+  position:relative;overflow:hidden;
+  animation: fadeUp 0.6s ease both;
+}
+.hero::before {
+  content:'';
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:280px;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+
+.checkmark {
+  width:64px;height:64px;border-radius:50%;
+  background:var(--green2);
+  border:2px solid rgba(0,200,83,0.35);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;
+  font-size:28px;
+  animation: popIn 0.5s cubic-bezier(.2,1.4,.5,1) 0.2s both;
+}
+
+.hero-eyebrow {
+  font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.hero-eyebrow::before,.hero-eyebrow::after {
+  content:'';display:block;width:32px;height:1px;background:rgba(249,168,37,0.35);
+}
+
+.hero h1 {
+  font-family:'Syne',sans-serif;
+  font-size:clamp(30px,5vw,44px);
+  font-weight:800;line-height:1.1;
+  color:#fff;margin-bottom:14px;
+}
+.hero h1 em { font-style:normal;color:var(--gold); }
+
+.hero-sub {
+  font-size:16px;color:var(--grey);line-height:1.7;
+  max-width:480px;margin:0 auto 32px;
+}
+
+/* timeline */
+.timeline {
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;margin-top:8px;
+}
+.tl-item {
+  padding:16px 14px;text-align:center;
+  border-right:1px solid var(--border);
+  background:rgba(255,255,255,0.02);
+}
+.tl-item:last-child{border-right:none;}
+.tl-time {
+  font-family:'Syne',sans-serif;font-size:12px;font-weight:700;
+  color:var(--gold);margin-bottom:6px;letter-spacing:0.5px;
+}
+.tl-label { font-size:12px;color:var(--grey);line-height:1.5; }
+
+/* ── SECTION SHARED ── */
+.section {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  margin-bottom:16px;
+  overflow:hidden;
+  animation: fadeUp 0.6s ease both;
+}
+.section-head {
+  padding:24px 28px 20px;
+  border-bottom:1px solid var(--border2);
+  display:flex;align-items:center;gap:14px;
+}
+.section-icon {
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.section-icon.blue { background:rgba(21,101,192,0.15);border:1px solid rgba(21,101,192,0.25); }
+.section-icon.gold { background:rgba(249,168,37,0.12);border:1px solid rgba(249,168,37,0.25); }
+.section-icon.teal { background:rgba(0,151,167,0.12);border:1px solid rgba(0,151,167,0.25); }
+.section-icon.green{ background:rgba(0,200,83,0.10);border:1px solid rgba(0,200,83,0.25); }
+
+.section-title {
+  font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:#fff;
+}
+.section-sub { font-size:13px;color:var(--grey);margin-top:3px;line-height:1.5; }
+
+.section-body { padding:24px 28px; }
+
+/* ── TOOLS ── */
+.tool-card {
+  background:rgba(255,255,255,0.025);
+  border:1px solid var(--border2);
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:12px;
+  transition:border-color 0.2s;
+}
+.tool-card:last-child{margin-bottom:0;}
+.tool-card:hover{border-color:rgba(21,101,192,0.35);}
+
+.tool-top {
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:16px;margin-bottom:14px;
+}
+.tool-name {
+  font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;
+  margin-bottom:4px;
+}
+.tool-tag {
+  display:inline-block;font-size:10px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;
+  padding:3px 10px;border-radius:100px;flex-shrink:0;
+}
+.tool-tag.kit { background:rgba(21,101,192,0.15);color:#90CAF9;border:1px solid rgba(21,101,192,0.25); }
+.tool-tag.calc { background:rgba(0,151,167,0.12);color:#80DEEA;border:1px solid rgba(0,151,167,0.2); }
+.tool-tag.roi  { background:rgba(249,168,37,0.1);color:#FFE082;border:1px solid rgba(249,168,37,0.25); }
+
+.tool-desc {
+  font-size:13px;color:var(--grey);line-height:1.7;margin-bottom:16px;
+}
+
+.tool-why {
+  background:rgba(21,101,192,0.06);
+  border-left:2px solid var(--blue);
+  padding:10px 14px;border-radius:0 8px 8px 0;
+  margin-bottom:16px;
+}
+.tool-why-label {
+  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--blue2);margin-bottom:4px;
+}
+.tool-why p { font-size:13px;color:#8BAAD0;line-height:1.65; }
+
+.tool-how {
+  display:flex;flex-direction:column;gap:6px;margin-bottom:16px;
+}
+.tool-how-item {
+  display:flex;gap:10px;align-items:flex-start;
+  font-size:13px;color:var(--grey);line-height:1.5;
+}
+.tool-how-item::before {
+  content:attr(data-n);
+  width:20px;height:20px;border-radius:50%;
+  background:rgba(21,101,192,0.15);border:1px solid rgba(21,101,192,0.25);
+  color:#90CAF9;font-size:11px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+
+.dl-btn {
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 20px;border-radius:8px;
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;
+  text-decoration:none;transition:all 0.2s;cursor:pointer;
+  border:none;width:100%;justify-content:center;
+}
+.dl-btn.primary {
+  background:var(--blue);color:#fff;
+  box-shadow:0 4px 16px rgba(21,101,192,0.3);
+}
+.dl-btn.primary:hover { background:var(--blue2);transform:translateY(-1px); }
+.dl-btn.outline {
+  background:transparent;color:var(--teal);
+  border:1px solid rgba(0,151,167,0.35);
+}
+.dl-btn.outline:hover { background:rgba(0,151,167,0.08); }
+.dl-btn.muted {
+  background:rgba(249,168,37,0.08);color:var(--gold);
+  border:1px solid rgba(249,168,37,0.2);
+}
+
+/* ── LEAD PREVIEW ── */
+.lead-preview {
+  background:rgba(255,255,255,0.02);
+  border:1px solid var(--border2);
+  border-radius:12px;overflow:hidden;
+  margin-bottom:20px;
+}
+.lp-header {
+  background:rgba(0,200,83,0.08);
+  border-bottom:1px solid rgba(0,200,83,0.15);
+  padding:12px 18px;
+  display:flex;align-items:center;gap:10px;
+}
+.lp-dot { width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0; }
+.lp-label { font-size:12px;font-weight:700;color:var(--green);letter-spacing:0.5px; }
+.lp-body { padding:18px;font-size:13px;color:var(--grey);line-height:2; }
+.lp-field { display:flex;gap:8px; }
+.lp-key { color:var(--muted);min-width:140px;flex-shrink:0; }
+.lp-val { color:var(--white); }
+.lp-section-label {
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin:14px 0 6px;
+}
+
+.lead-tip {
+  background:rgba(239,83,80,0.07);
+  border:1px solid rgba(239,83,80,0.18);
+  border-radius:10px;padding:14px 18px;
+  display:flex;align-items:flex-start;gap:12px;
+}
+.lead-tip-icon { font-size:20px;flex-shrink:0;margin-top:1px; }
+.lead-tip-text { font-size:13px;color:#EF9A9A;line-height:1.65; }
+.lead-tip-text strong { color:#EF5350; }
+
+/* ── VIDEO PLACEHOLDER ── */
+.video-placeholder {
+  background:rgba(255,255,255,0.02);
+  border:2px dashed rgba(21,101,192,0.25);
+  border-radius:12px;
+  padding:48px 24px;
+  text-align:center;margin-bottom:0;
+}
+.vp-icon { font-size:40px;margin-bottom:16px; }
+.vp-title { font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:8px; }
+.vp-sub { font-size:13px;color:var(--muted);line-height:1.65;max-width:380px;margin:0 auto; }
+.vp-badge {
+  display:inline-block;margin-top:16px;
+  background:rgba(21,101,192,0.12);border:1px solid rgba(21,101,192,0.25);
+  color:var(--grey);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  padding:5px 14px;border-radius:100px;
+}
+
+/* ── FOOTER ── */
+.footer-cta {
+  background:linear-gradient(135deg,rgba(21,101,192,0.1),rgba(21,101,192,0.04));
+  border:1px solid rgba(21,101,192,0.25);
+  border-radius:16px;padding:32px 28px;
+  text-align:center;margin-top:8px;
+}
+.footer-cta h3 {
+  font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:8px;
+}
+.footer-cta p { font-size:14px;color:var(--grey);line-height:1.7;margin-bottom:20px; }
+.wa-btn {
+  display:inline-flex;align-items:center;gap:10px;
+  background:#25D366;color:#fff;
+  font-size:15px;font-weight:700;
+  padding:14px 28px;border-radius:10px;
+  text-decoration:none;transition:all 0.2s;
+  box-shadow:0 6px 20px rgba(37,211,102,0.25);
+}
+.wa-btn:hover { transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,0.35); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes popIn {
+  from{opacity:0;transform:scale(0.4);}
+  to{opacity:1;transform:scale(1);}
+}
+.section:nth-child(2){animation-delay:0.1s;}
+.section:nth-child(3){animation-delay:0.2s;}
+.section:nth-child(4){animation-delay:0.3s;}
+.section:nth-child(5){animation-delay:0.4s;}
+.section:nth-child(6){animation-delay:0.5s;}
+
+/* ── MOBILE ── */
+@media(max-width:600px){
+  .wrap{padding:20px 14px 60px;}
+  .hero{padding:36px 18px 32px;}
+  .timeline{grid-template-columns:1fr 1fr;}
+  .tl-item:nth-child(2){border-right:none;}
+  .tl-item:nth-child(3){border-top:1px solid var(--border);}
+  .tl-item:nth-child(4){border-top:1px solid var(--border);border-right:none;}
+  .section-body,.section-head{padding:18px;}
+  .tool-top{flex-direction:column;gap:8px;}
+  .lp-key{min-width:110px;}
+}
+</style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>🎉 Welcome to Tubalcain!</h1>
-            <p class="subtitle">Your onboarding is complete. Here's what happens next.</p>
-            <p class="description">You're now part of Nigeria's #1 solar lead generation agency. Let's close some deals.</p>
+<div class="wrap">
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="checkmark">✓</div>
+  <div class="hero-eyebrow">Onboarding Complete</div>
+  <h1>You Are Now <em>Inside</em><br>the Tubalcain System.</h1>
+  <p class="hero-sub">Your campaign is being built. While you wait, set up every tool below  they are the difference between closing 10% of your leads and closing 38%.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">Now</div>
+      <div class="tl-label">Set up your tools below</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">6 Hours</div>
+      <div class="tl-label">Setup confirmation sent</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">24–48 hrs</div>
+      <div class="tl-label">Your ads go live</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">2–3 Days</div>
+      <div class="tl-label">First qualified leads arrive</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOOLS ══ -->
+<div class="section">
+  <div class="section-head">
+    <div class="section-icon gold">🛠</div>
+    <div>
+      <div class="section-title">Your Closing Tools  Download All Three Now</div>
+      <div class="section-sub">These tools were built specifically to help you convert our 8-gate qualified leads into paid installations.</div>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <!-- TOOL 1 -->
+    <div class="tool-card">
+      <div class="tool-top">
+        <div>
+          <div class="tool-name">Authority Close Kit  Volume 1</div>
+          <div class="tool-tag kit">Quotation Template</div>
         </div>
-    </section>
+      </div>
+      <div class="tool-desc">
+        A professional solar quotation template pre-formatted for Nigerian installers. Covers system size, component breakdown, total cost, payment terms, and warranty details  everything a homeowner needs to see before saying yes.
+      </div>
+      <div class="tool-why">
+        <div class="tool-why-label">Why it was built</div>
+        <p>Most installers lose deals not because the price is too high but because the quotation looks unprofessional or incomplete. A homeowner spending ₦2M–₦7M on solar needs to feel confident in the business they are giving that money to. Volume 1 makes your quotation look as serious as your service.</p>
+      </div>
+      <div class="tool-how">
+        <div class="tool-how-item" data-n="1">Download and save the template to your phone and laptop.</div>
+        <div class="tool-how-item" data-n="2">Fill in your business name, logo, and contact details once  save it as your master template.</div>
+        <div class="tool-how-item" data-n="3">After the site visit, use the Solar Load Calculator output to fill in the system size and component details.</div>
+        <div class="tool-how-item" data-n="4">Send the completed quotation to the homeowner within 24 hours of the site visit  speed signals professionalism.</div>
+      </div>
+      <a href="https://docs.google.com/document/d/1dDwd3fgAjDoeaeFkoNqNmtzxnn5TyeZu/export?format=docx" target="_blank" class="dl-btn primary">
+        ⬇ Download Authority Close Kit Vol. 1
+      </a>
+    </div>
 
-    <!-- Timeline Section -->
-    <section class="container">
-        <h2>What Happens Next</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <p class="timeline-item-time">Within 6 hours</p>
-                <h3>Setup Confirmation</h3>
-                <p>We'll review your responses and send you a setup confirmation.</p>
-            </div>
-            <div class="timeline-item">
-                <p class="timeline-item-time">Within 24-48 hours</p>
-                <h3>Ads Go Live</h3>
-                <p>Your Facebook ads launch and start reaching qualified homeowners.</p>
-            </div>
-            <div class="timeline-item">
-                <p class="timeline-item-time">Within 2-3 days</p>
-                <h3>First Leads Arrive</h3>
-                <p>You'll start receiving qualified homeowner leads via SMS and Email.</p>
-            </div>
-            <div class="timeline-item">
-                <p class="timeline-item-time">Every Monday</p>
-                <h3>Weekly Reports</h3>
-                <p>Total leads delivered, lead quality breakdown, and ad performance stats.</p>
-            </div>
+    <!-- TOOL 2 -->
+    <div class="tool-card">
+      <div class="tool-top">
+        <div>
+          <div class="tool-name">Authority Close Kit  Volume 2</div>
+          <div class="tool-tag kit">WhatsApp Script</div>
         </div>
-    </section>
+      </div>
+      <div class="tool-desc">
+        A word-for-word WhatsApp conversation guide for the first contact after a lead arrives. Every message, every objection, and every follow-up scripted out  from "Hi, I just received your enquiry" all the way to "Shall we book the site visit?"
+      </div>
+      <div class="tool-why">
+        <div class="tool-why-label">Why it was built</div>
+        <p>Most solar installers lose qualified leads in the first 3 messages  not because the lead is bad but because the response is too generic or too slow. Volume 2 gives you the exact words to say at every stage of the WhatsApp conversation so the lead never goes cold and you never lose a deal because of how you responded.</p>
+      </div>
+      <div class="tool-how">
+        <div class="tool-how-item" data-n="1">Download and save to your phone so it is open the moment a lead arrives in your WhatsApp.</div>
+        <div class="tool-how-item" data-n="2">Read the first message script before you type anything  not after.</div>
+        <div class="tool-how-item" data-n="3">Personalise the lead's name and city in the message before sending.</div>
+        <div class="tool-how-item" data-n="4">Follow each phase in order: Welcome → Trust → Qualification → Site Visit booking.</div>
+      </div>
+      <a href="https://docs.google.com/document/d/1ezbkd5AYH3Yg9vGmHeabhMg7zwEELOlK/export?format=docx" target="_blank" class="dl-btn primary">
+        ⬇ Download Authority Close Kit Vol. 2
+      </a>
+    </div>
 
-    <!-- Video Section -->
-    <section class="container">
-        <div class="video-section">
-            <h2>📹 Complete Video Guide</h2>
-            <p>A comprehensive video walkthrough of all your tools, how to use them, and the importance of responding to leads within 1 hour.</p>
-            <div class="video-placeholder">
-                <div class="video-placeholder-icon">⚡</div>
-                <p style="font-weight: 600; color: #a855f7;">Video coming soon!</p>
-                <p style="color: #6b7280; font-size: 0.9rem; margin-top: 0.5rem;">We're preparing a personalized video guide for you</p>
-            </div>
-            <p style="font-size: 0.875rem; color: #6b7280; font-style: italic;">In the meantime, scroll down to read detailed descriptions of each tool and how to use them.</p>
+    <!-- TOOL 3 -->
+    <div class="tool-card">
+      <div class="tool-top">
+        <div>
+          <div class="tool-name">Solar Load Calculator</div>
+          <div class="tool-tag calc">Web Tool</div>
         </div>
-    </section>
+      </div>
+      <div class="tool-desc">
+        A live web-based tool that calculates the exact solar system size a homeowner needs based on their appliances and usage. Gives you a professional, data-backed recommendation during or after the first site visit.
+      </div>
+      <div class="tool-why">
+        <div class="tool-why-label">Why it was built</div>
+        <p>Homeowners do not trust verbal estimates. When you show them a calculated system recommendation based on their actual appliances  not a guess  the decision becomes logical, not emotional. It reduces price objections by 60% because the number is justified.</p>
+      </div>
+      <div class="tool-how">
+        <div class="tool-how-item" data-n="1">Bookmark the link on your phone right now  you need it accessible during site visits.</div>
+        <div class="tool-how-item" data-n="2">During the site visit, ask the homeowner to list their major appliances with you.</div>
+        <div class="tool-how-item" data-n="3">Enter the appliances into the calculator and show them the result on your phone screen.</div>
+        <div class="tool-how-item" data-n="4">Use the output in your quotation to justify the system size and price.</div>
+      </div>
+      <a href="https://tubalcainmy.github.io/The-ABC-Solar-load-Calculator/" target="_blank" class="dl-btn outline">
+        🔖 Bookmark the Solar Load Calculator
+      </a>
+    </div>
 
-    <!-- Free Tools Section -->
-    <section class="container">
-        <h2>Your Free Tools</h2>
-        <div class="tools">
-            <!-- Tool 1 -->
-            <div class="tool">
-                <button class="tool-header" onclick="toggleTool(this)">
-                    <div class="tool-header-left">
-                        <div class="tool-icon">📄</div>
-                        <div>
-                            <div class="tool-title">Authority Close Kit 1</div>
-                            <div class="tool-subtitle">Professional Quotation Template</div>
-                        </div>
-                    </div>
-                    <div class="tool-toggle">+</div>
-                </button>
-                <div class="tool-details">
-                    <h4>What It Is</h4>
-                    <p>A professional quotation template pre-formatted with all sections needed to present solar systems to homeowners.</p>
-
-                    <h4>How to Use</h4>
-                    <ol>
-                        <li>Open the template in Google Docs or Word</li>
-                        <li>Replace [YOUR COMPANY NAME] with your business name</li>
-                        <li>Fill in client-specific information in highlighted brackets</li>
-                        <li>Update pricing to match your actual costs</li>
-                        <li>Save as PDF and send to client via WhatsApp</li>
-                    </ol>
-
-                    <h4>Benefits</h4>
-                    <ul>
-                        <li>✓ Professional presentation that builds trust</li>
-                        <li>✓ Saves 30+ minutes per quotation</li>
-                        <li>✓ Includes all sections needed for a complete proposal</li>
-                        <li>✓ Flexible payment options pre-built</li>
-                        <li>✓ Guarantee section differentiates you from competitors</li>
-                    </ul>
-
-                    <div class="tool-details-box blue">
-                        <h4>Why It Was Created</h4>
-                        <p>Most solar installers send unprofessional quotations that hurt their close rates. This template ensures every proposal looks professional and includes all the psychological triggers that close deals.</p>
-                    </div>
-
-                    <div class="tool-details-box green">
-                        <h4>Impact</h4>
-                        <p>Professional appearance increases perceived value by 40%</p>
-                    </div>
-
-                    <a href="https://docs.google.com/document/d/1dDwd3fgAjDoeaeFkoNqNmtzxnn5TyeZu/export?format=docx" download class="tool-action">📥 Download PDF</a>
-                </div>
-            </div>
-
-            <!-- Tool 2 -->
-            <div class="tool">
-                <button class="tool-header" onclick="toggleTool(this)">
-                    <div class="tool-header-left">
-                        <div class="tool-icon">💬</div>
-                        <div>
-                            <div class="tool-title">Authority Close Kit 2</div>
-                            <div class="tool-subtitle">WhatsApp Sales Scripts</div>
-                        </div>
-                    </div>
-                    <div class="tool-toggle">+</div>
-                </button>
-                <div class="tool-details">
-                    <h4>What It Is</h4>
-                    <p>A complete set of 9 WhatsApp message templates that guide you through the entire sales process from initial contact to payment confirmation.</p>
-
-                    <h4>How to Use</h4>
-                    <ol>
-                        <li>When a lead arrives via SMS, follow Message 1 (Initial Contact)</li>
-                        <li>Call first, then send WhatsApp within 5 minutes</li>
-                        <li>Follow the message sequence and timing guidelines</li>
-                        <li>Customize with client name and their specific ROI numbers</li>
-                        <li>Use the installer notes to handle objections and edge cases</li>
-                    </ol>
-
-                    <h4>Benefits</h4>
-                    <ul>
-                        <li>✓ Removes guesswork from sales conversations</li>
-                        <li>✓ Ensures consistent messaging across all leads</li>
-                        <li>✓ Speeds up the sales process (most closes within 24 hours)</li>
-                        <li>✓ Handles common objections automatically</li>
-                        <li>✓ Increases close rates by 35%+ when followed exactly</li>
-                    </ul>
-
-                    <div class="tool-details-box blue">
-                        <h4>Why It Was Created</h4>
-                        <p>Most installers lose deals because they don't know what to say or when to say it. These scripts are battle-tested with 100+ solar installers and optimized for the Nigerian market.</p>
-                    </div>
-
-                    <div class="tool-details-box green">
-                        <h4>Impact</h4>
-                        <p>Removes hesitation and speeds up decision-making</p>
-                    </div>
-
-                    <a href="https://docs.google.com/document/d/1ezbkd5AYH3Yg9vGmHeabhMg7zwEELOlK/export?format=docx" download class="tool-action">📥 Download PDF</a>
-                </div>
-            </div>
-
-            <!-- Tool 3 -->
-            <div class="tool">
-                <button class="tool-header" onclick="toggleTool(this)">
-                    <div class="tool-header-left">
-                        <div class="tool-icon">⚡</div>
-                        <div>
-                            <div class="tool-title">Solar Load Calculator</div>
-                            <div class="tool-subtitle">System Sizing Tool</div>
-                        </div>
-                    </div>
-                    <div class="tool-toggle">+</div>
-                </button>
-                <div class="tool-details">
-                    <h4>What It Is</h4>
-                    <p>An interactive web tool that calculates the exact solar system size needed based on appliance list and energy consumption.</p>
-
-                    <h4>How to Use</h4>
-                    <ol>
-                        <li>Bookmark the link to your browser</li>
-                        <li>When a homeowner sends their appliance list, open the calculator</li>
-                        <li>Input each appliance, quantity, and daily usage hours</li>
-                        <li>The calculator shows: daily consumption, peak load, recommended inverter size, battery capacity, and panel count</li>
-                        <li>Copy these numbers into your WhatsApp messages</li>
-                    </ol>
-
-                    <h4>Benefits</h4>
-                    <ul>
-                        <li>✓ Eliminates manual calculations (saves 10+ minutes per lead)</li>
-                        <li>✓ Ensures system sizing is accurate and defensible</li>
-                        <li>✓ Reduces over-sizing and under-sizing errors</li>
-                        <li>✓ Creates confidence through data-driven recommendations</li>
-                        <li>✓ Ties ROI numbers to actual system specifications</li>
-                    </ul>
-
-                    <div class="tool-details-box blue">
-                        <h4>Why It Was Created</h4>
-                        <p>Most installers guess at system sizes, leading to either oversized systems (wasting money) or undersized systems (poor performance).</p>
-                    </div>
-
-                    <div class="tool-details-box green">
-                        <h4>Impact</h4>
-                        <p>Accurate sizing = accurate ROI numbers = confident homeowners</p>
-                    </div>
-
-                    <a href="https://tubalcainmy.github.io/The-ABC-Solar-load-Calculator/" target="_blank" class="tool-action green">🔗 Open & Bookmark</a>
-                </div>
-            </div>
-
-            <!-- Tool 4 -->
-            <div class="tool">
-                <button class="tool-header" onclick="toggleTool(this)">
-                    <div class="tool-header-left">
-                        <div class="tool-icon">📊</div>
-                        <div>
-                            <div class="tool-title">ROI Calculator</div>
-                            <div class="tool-subtitle">Personalized (Sent Separately)</div>
-                        </div>
-                    </div>
-                    <div class="tool-toggle">+</div>
-                </button>
-                <div class="tool-details">
-                    <h4>What It Is</h4>
-                    <p>A personalized ROI calculator customized with your specific business details from the onboarding form.</p>
-
-                    <h4>How to Use</h4>
-                    <ol>
-                        <li>You'll receive this via WhatsApp within 24 hours</li>
-                        <li>It's customized with your WhatsApp number, location, and ad budget</li>
-                        <li>Share with your team for sales presentations</li>
-                        <li>Use in client meetings to show ROI projections</li>
-                        <li>Update monthly as your results improve</li>
-                    </ol>
-
-                    <h4>Benefits</h4>
-                    <ul>
-                        <li>✓ Personalized numbers are more credible than generic examples</li>
-                        <li>✓ Shows exactly how much you'll earn with Tubalcain</li>
-                        <li>✓ Removes pricing objections through transparent ROI math</li>
-                        <li>✓ Creates confidence in our business model</li>
-                        <li>✓ Tracks your performance over time</li>
-                    </ul>
-
-                    <div class="tool-details-box blue">
-                        <h4>Why It's Personalized</h4>
-                        <p>The ROI calculator needs to reflect your specific situation: your WhatsApp number, location, ad budget, and business model.</p>
-                    </div>
-
-                    <div class="tool-details-box purple">
-                        <h4>⏰ Coming within 24 hours via WhatsApp</h4>
-                        <p>Your personalized ROI calculator will be sent to your WhatsApp number with your specific business details.</p>
-                    </div>
-                </div>
-            </div>
+    <!-- TOOL 4  ROI Calculator -->
+    <div class="tool-card">
+      <div class="tool-top">
+        <div>
+          <div class="tool-name">ROI Calculator  Personalised for You</div>
+          <div class="tool-tag roi">Coming to Your WhatsApp</div>
         </div>
-    </section>
+      </div>
+      <div class="tool-desc">
+        A personalised ROI report tool that shows homeowners exactly how much money they will save over 20 years based on their current energy spend, system size, and battery type. Built with your business WhatsApp number embedded so homeowners contact you directly.
+      </div>
+      <div class="tool-why">
+        <div class="tool-why-label">Why it is personalised</div>
+        <p>Unlike the other tools, the ROI Calculator needs to be customised with your specific WhatsApp number before it is sent to you. This ensures every homeowner who uses it contacts you directly  not a generic number. Mystery will send your personalised version to your WhatsApp within 24 hours of your campaign going live.</p>
+      </div>
+      <div style="background:rgba(249,168,37,0.07);border:1px solid rgba(249,168,37,0.2);border-radius:8px;padding:14px 16px;margin-top:4px;">
+        <div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">What to do</div>
+        <div style="font-size:13px;color:#C8A84B;line-height:1.65;">Nothing right now. Mystery will send your personalised ROI Calculator link directly to your WhatsApp <strong style="color:var(--gold);">within 24 hours of your campaign going live.</strong> Keep an eye on your WhatsApp for a message from <strong style="color:var(--gold);">+234 802 923 4994.</strong></div>
+      </div>
+    </div>
 
-    <!-- Lead Example Section -->
-    <section class="container">
-        <h2>What Your Leads Will Look Like</h2>
-        
-        <div class="lead-example">
-            <h3>📧 Example Lead (From Email)</h3>
-            <div class="lead-data">
-                <div class="lead-data-section">
-                    <div class="lead-data-title">👤 PERSONAL DETAILS</div>
-                    <div class="lead-data-item">Name: <span class="lead-data-value">Alexander</span></div>
-                    <div class="lead-data-item">WhatsApp: <span class="lead-data-value">[REDACTED]</span></div>
-                    <div class="lead-data-item">Location: <span class="lead-data-value">Lagos</span></div>
-                </div>
+  </div>
+</div>
 
-                <div class="lead-data-section">
-                    <div class="lead-data-title">💰 ROI DETAILS</div>
-                    <div class="lead-data-item">Budget Range: <span class="lead-data-value">₦5m-5.8m</span></div>
-                    <div class="lead-data-item">Payback Period: <span class="lead-data-value">4 years</span></div>
-                    <div class="lead-data-item">ROI in 20 years: <span class="lead-data-value">3882%</span></div>
-                    <div class="lead-data-item">Monthly Savings: <span class="lead-data-value">₦101,250</span></div>
-                    <div class="lead-data-item">20-Year Savings: <span class="lead-data-value">₦215,054,466</span></div>
-                    <div class="lead-data-item">Current Energy Spend: <span class="lead-data-value">₦105,000</span></div>
-                </div>
+<!-- ══ LEAD PREVIEW ══ -->
+<div class="section">
+  <div class="section-head">
+    <div class="section-icon green">📲</div>
+    <div>
+      <div class="section-title">What Your Leads Look Like When They Arrive</div>
+      <div class="section-sub">Every qualified lead comes to your email first, then directly to your WhatsApp. Here is exactly what to expect.</div>
+    </div>
+  </div>
+  <div class="section-body">
 
-                <div class="lead-data-section">
-                    <div class="lead-data-title">⚡ SYSTEM SIZE</div>
-                    <div class="lead-data-item">Recommended: <span class="lead-data-value">5 – 7.5 kVA</span></div>
-                    <div class="lead-data-item">Timeline: <span class="lead-data-value">2-4 weeks</span></div>
-                    <div class="lead-data-item">Monthly Power Spend: <span class="lead-data-value">₦80k-120k</span></div>
-                    <div class="lead-data-item">Has Installer: <span class="lead-data-value">No</span></div>
-                </div>
+    <div style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Sample email notification</div>
+    <div class="lead-preview">
+      <div class="lp-header">
+        <div class="lp-dot"></div>
+        <div class="lp-label">🔥 New Qualified Lead  green</div>
+      </div>
+      <div class="lp-body">
+        <div class="lp-section-label">Personal Details</div>
+        <div class="lp-field"><span class="lp-key">Name:</span><span class="lp-val">Alexander</span></div>
+        <div class="lp-field"><span class="lp-key">WhatsApp:</span><span class="lp-val">0803 ••• ••••</span></div>
+        <div class="lp-field"><span class="lp-key">Location:</span><span class="lp-val">Lagos</span></div>
 
-                <div class="lead-data-section">
-                    <div class="lead-data-title">🏠 PROPERTY DETAILS</div>
-                    <div class="lead-data-item">Ownership: <span class="lead-data-value">Owner</span></div>
-                    <div class="lead-data-item">Building Type: <span class="lead-data-value">Duplex</span></div>
-                    <div class="lead-data-item">Electrical Issues: <span class="lead-data-value">None</span></div>
-                    <div class="lead-data-item">Roof Condition: <span class="lead-data-value">Solid</span></div>
-                    <div class="lead-data-item">Shading: <span class="lead-data-value">No shade</span></div>
-                </div>
+        <div class="lp-section-label">ROI Details</div>
+        <div class="lp-field"><span class="lp-key">Budget Range:</span><span class="lp-val">₦5m – ₦5.8m</span></div>
+        <div class="lp-field"><span class="lp-key">Payback Period:</span><span class="lp-val">4 years</span></div>
+        <div class="lp-field"><span class="lp-key">ROI in 20 years:</span><span class="lp-val">3,882%</span></div>
+        <div class="lp-field"><span class="lp-key">Monthly Savings:</span><span class="lp-val">₦101,250</span></div>
+        <div class="lp-field"><span class="lp-key">Current Energy Spend:</span><span class="lp-val">₦105,000/month</span></div>
 
-                <div class="lead-warning">
-                    <strong>🔥 Contact within 5 minutes. First installer wins.</strong>
-                </div>
-            </div>
-        </div>
+        <div class="lp-section-label">Project Details</div>
+        <div class="lp-field"><span class="lp-key">System Size:</span><span class="lp-val">5 – 7.5 kVA</span></div>
+        <div class="lp-field"><span class="lp-key">Timeline:</span><span class="lp-val">2–4 weeks</span></div>
+        <div class="lp-field"><span class="lp-key">Has Installer:</span><span class="lp-val">No installer contacted yet</span></div>
 
-        <!-- Response Time Section -->
-        <div class="response-section">
-            <h3>⚠️ Critical: 1-Hour Response Time</h3>
-            
-            <p>Solar leads are HOT. The homeowner just completed your ROI assessment, saw their savings numbers, and is ready to move forward. The moment they submit their details, they're in "buying mode."</p>
+        <div class="lp-section-label">Property Details</div>
+        <div class="lp-field"><span class="lp-key">Ownership:</span><span class="lp-val">Owner</span></div>
+        <div class="lp-field"><span class="lp-key">Building Type:</span><span class="lp-val">Duplex</span></div>
+        <div class="lp-field"><span class="lp-key">Electrical Issues:</span><span class="lp-val">None</span></div>
+        <div class="lp-field"><span class="lp-key">Roof Condition:</span><span class="lp-val">Solid</span></div>
+        <div class="lp-field"><span class="lp-key">Shading:</span><span class="lp-val">No shade</span></div>
+      </div>
+    </div>
 
-            <div class="response-rates">
-                <p>Close Rate by Response Time:</p>
-                <ul>
-                    <li>✅ <strong>Within 5 minutes:</strong> 60% close rate</li>
-                    <li>✅ <strong>Within 1 hour:</strong> 40% close rate</li>
-                    <li>⚠️ <strong>After 2 hours:</strong> 15% close rate</li>
-                    <li>❌ <strong>After 4 hours:</strong> 5% close rate</li>
-                </ul>
-            </div>
+    <div class="lead-tip">
+      <div class="lead-tip-icon">⏱</div>
+      <div class="lead-tip-text">
+        <strong>Call within 1 hour. First installer wins.</strong><br>
+        Every lead you receive has not spoken to any other installer. The moment that lead hits your WhatsApp, the clock starts. Our data shows installers who call within 1 hour close <strong>38% of leads.</strong> Installers who call after 24 hours close under 10%. Do not wait until you are "ready"  call immediately with Authority Close Kit Vol. 1 open in front of you.
+      </div>
+    </div>
 
-            <p><strong>How to Achieve It:</strong></p>
-            <ol>
-                <li>Enable WhatsApp notifications on your phone</li>
-                <li>Assign someone to monitor leads during business hours</li>
-                <li>Have your Authority Close Kit 2 open and ready</li>
-                <li>Save messages as templates for quick sending</li>
-                <li>Have your calendar open to schedule assessments immediately</li>
-            </ol>
-        </div>
-    </section>
+  </div>
+</div>
 
-    <!-- Next Steps Section -->
-    <section class="container">
-        <div class="next-steps">
-            <h2>Next Steps</h2>
-            
-            <div class="next-steps-list">
-                <div class="next-step">
-                    <div class="next-step-number">1</div>
-                    <div class="next-step-content">
-                        <p>Download your tools</p>
-                        <p>Save all three kits to your computer</p>
-                    </div>
-                </div>
-                <div class="next-step">
-                    <div class="next-step-number">2</div>
-                    <div class="next-step-content">
-                        <p>Review the scripts</p>
-                        <p>Read through Authority Close Kit 2 before your first lead arrives</p>
-                    </div>
-                </div>
-                <div class="next-step">
-                    <div class="next-step-number">3</div>
-                    <div class="next-step-content">
-                        <p>Set up your system</p>
-                        <p>Enable notifications, prepare templates, assign lead monitor</p>
-                    </div>
-                </div>
-                <div class="next-step">
-                    <div class="next-step-number">4</div>
-                    <div class="next-step-content">
-                        <p>Bookmark the calculator</p>
-                        <p>Save the Solar Load Calculator to your browser</p>
-                    </div>
-                </div>
-                <div class="next-step">
-                    <div class="next-step-number">5</div>
-                    <div class="next-step-content">
-                        <p>Watch the video</p>
-                        <p>When it's ready, watch the complete guide (link will be sent)</p>
-                    </div>
-                </div>
-            </div>
+<!-- ══ VIDEO PLACEHOLDER ══ -->
+<div class="section">
+  <div class="section-head">
+    <div class="section-icon blue">▶</div>
+    <div>
+      <div class="section-title">Video Walkthrough  How to Use Every Tool</div>
+      <div class="section-sub">A full walkthrough of all three tools and the 1-hour response rule. Coming soon.</div>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="video-placeholder">
+      <div class="vp-icon">🎬</div>
+      <div class="vp-title">Training Video Coming Soon</div>
+      <div class="vp-sub">Mystery is recording a full walkthrough showing exactly how to use each tool from the moment a lead arrives to the moment a site visit is booked. You will be notified on WhatsApp the moment it goes live.</div>
+      <div class="vp-badge">Video being recorded  check back soon</div>
+    </div>
+  </div>
+</div>
 
-            <p style="font-weight: 600; margin-bottom: 1rem;">Questions? We're here to help:</p>
-            <div class="contact-buttons">
-                <a href="https://wa.me/2348029234994" target="_blank" class="contact-button">💬 WhatsApp: 0802 923 4994</a>
-                <a href="mailto:tubalcain.my@gmail.com" class="contact-button email">📧 Email Support</a>
-            </div>
-        </div>
-    </section>
+<!-- ══ WEEKLY REPORT ══ -->
+<div class="section">
+  <div class="section-head">
+    <div class="section-icon teal">📊</div>
+    <div>
+      <div class="section-title">Your Weekly Performance Report</div>
+      <div class="section-sub">Every Monday, automatically to your WhatsApp.</div>
+    </div>
+  </div>
+  <div class="section-body">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div style="background:rgba(0,151,167,0.06);border:1px solid rgba(0,151,167,0.15);border-radius:10px;padding:16px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:8px;">Leads Report</div>
+        <div style="font-size:13px;color:var(--grey);line-height:1.7;">Total leads delivered · Lead quality breakdown · City distribution</div>
+      </div>
+      <div style="background:rgba(0,151,167,0.06);border:1px solid rgba(0,151,167,0.15);border-radius:10px;padding:16px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:8px;">Ad Performance</div>
+        <div style="font-size:13px;color:var(--grey);line-height:1.7;">Ad spend used · Cost per lead · Budget remaining</div>
+      </div>
+    </div>
+    <div style="margin-top:12px;padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid var(--border2);border-radius:8px;font-size:13px;color:var(--muted);line-height:1.65;">
+      Reports arrive every <strong style="color:var(--white);">Monday morning</strong> automatically. If you have questions before then, WhatsApp Mystery directly at <strong style="color:var(--white);">+234 802 923 4994.</strong>
+    </div>
+  </div>
+</div>
 
-    <!-- Footer -->
-    <footer>
-        <p>Welcome to Tubalcain. Let's close some deals. 🚀</p>
-        <p>© 2026 Tubalcain Agency. All rights reserved.</p>
-    </footer>
+<!-- ══ FOOTER CTA ══ -->
+<div class="footer-cta">
+  <h3>Questions Before Your Campaign Goes Live?</h3>
+  <p>Message Mystery directly on WhatsApp  responses within 2 hours during business hours. Have your onboarding form confirmation ready so Mystery knows your campaign details.</p>
+  <a href="https://wa.me/2348029234994?text=Hi%20Mystery%2C%20I%20just%20completed%20my%20onboarding%20form%20and%20have%20a%20question%20about%20my%20campaign." target="_blank" class="wa-btn">
+    💬 Message Mystery on WhatsApp
+  </a>
+</div>
 
-    <script>
-        function toggleTool(button) {
-            const tool = button.closest('.tool');
-            const details = tool.querySelector('.tool-details');
-            const toggle = button.querySelector('.tool-toggle');
-
-            // Close all other tools
-            document.querySelectorAll('.tool').forEach(t => {
-                if (t !== tool) {
-                    t.querySelector('.tool-details').classList.remove('open');
-                    t.querySelector('.tool-toggle').textContent = '+';
-                }
-            });
-
-            // Toggle current tool
-            details.classList.toggle('open');
-            toggle.textContent = details.classList.contains('open') ? '−' : '+';
-        }
-    </script>
+</div><!-- /wrap -->
 </body>
 </html>

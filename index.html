@@ -3,593 +3,739 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>You're In  Welcome to the Tubalcain System</title>
+<title>You're In: Welcome to the Tubalcain System</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#001B3D">
+
+<!-- Tab icon: the Tubalcain T mark. SVG first for sharp modern browsers,
+     PNGs for everything else, apple-touch-icon for iPhone home screens. -->
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   EDIT THIS BLOCK. Nothing else in the file needs to change.
+
+   The page reads the client's plan from the address. Point your
+   onboarding form's redirect at:
+     .../tubalcain-thank-you/?tier=1   for Verified Buyer
+     .../tubalcain-thank-you/?tier=2   for Package-Matched Buyer
+   Add &name=Caleb to greet them by name. With no tier in the address
+   the page behaves as Verified Buyer and shows the upgrade.
+   ══════════════════════════════════════════════════════════════════ */
+const PAGE_CONFIG = {
+  mysteryWhatsapp: "2348029234994",
+
+  // Paste the walkthrough video link here once it is recorded. YouTube,
+  // Loom and Vimeo links all work as they are; the page turns them into
+  // an embedded player. Left empty, the "coming soon" card shows.
+  vslUrl: "",
+
+  // Upload the 8-Gate Edition of each kit over the old Google Doc as a
+  // new version and these links keep working unchanged.
+  kitVol1Url: "https://docs.google.com/document/d/1v6Py87l4XL7EkO2UWeMrQ6H8uP8KJ2Uv/export?format=docx",
+  kitVol2Url: "https://docs.google.com/document/d/1oH4yLysba0q5IpFxx_e_fntS-BszhowL/export?format=docx",
+  loadCalculatorUrl: "https://tubalcainmy.github.io/The-ABC-Solar-load-Calculator/",
+
+  tier1Price: 5000,
+  tier2Price: 10000,
+};
+</script>
+
 <style>
-:root {
-  --navy:     #050D1A;
-  --navy2:    #071525;
-  --navy3:    #0D1F35;
-  --card:     #0A1628;
-  --border:   rgba(21,101,192,0.18);
-  --border2:  rgba(21,101,192,0.10);
-  --blue:     #1565C0;
-  --blue2:    #1976D2;
-  --gold:     #F9A825;
-  --teal:     #0097A7;
-  --white:    #EEF4FF;
-  --grey:     #7B92B2;
-  --muted:    #4A6FA5;
-  --green:    #00C853;
-  --green2:   rgba(0,200,83,0.12);
-  --red:      #EF5350;
+/* Tubalcain brand tokens, the same set the 8-Gate page and the logo use. */
+:root{
+  --navy:#001B3D;
+  --navy-2:#062A52;
+  --blue:#0081CC;
+  --blue-dark:#00629B;
+  --primary-light:#7FC4F0;
+  --on-dark-muted:#C4D3E3;
+  --wash:#EEF3F8;
+  --blue-wash:#E4F0FA;
+  --white:#FFFFFF;
+  --body:#1C2733;
+  --muted:#5A6A7A;
+  --border:#DCE5EE;
+  --success:#1E9E5A;
+  --success-wash:#E7F6ED;
+  --warning:#E0A100;
+  --warning-ink:#8A5F00;
+  --warning-wash:#FDF3DD;
+  --negative:#C0392B;
+  --negative-wash:#FBEAE8;
+  --shadow:0 2px 10px rgba(0,27,61,0.05);
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
-
-body {
-  font-family:'DM Sans',sans-serif;
-  background: var(--navy);
-  color: var(--white);
-  min-height:100vh;
-  overflow-x:hidden;
+html{-webkit-text-size-adjust:100%;}
+body{
+  font-family:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--wash);
+  color:var(--body);
+  font-size:16px;line-height:1.6;
+  min-height:100vh;overflow-x:hidden;
 }
+a{color:var(--blue-dark);}
+.wrap{max-width:720px;margin:0 auto;padding:20px 20px 64px;}
+.ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
 
-/* ── BACKGROUND ── */
-body::before {
-  content:'';
-  position:fixed;inset:0;
-  background:
-    radial-gradient(ellipse 70% 50% at 5% 10%, rgba(21,101,192,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 95% 85%, rgba(249,168,37,0.05) 0%, transparent 50%);
-  pointer-events:none;z-index:0;
-}
-
-.wrap {
-  max-width:760px;
-  margin:0 auto;
-  padding:40px 20px 80px;
-  position:relative;z-index:1;
-}
+/* ── BRAND BAR ── */
+.brandbar{display:flex;align-items:center;gap:10px;padding:4px 2px 16px;}
+.brandbar svg{width:30px;height:30px;border-radius:7px;flex-shrink:0;}
+.brandbar-name{font-size:13px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--navy);}
+.brandbar-sub{font-size:11.5px;color:var(--muted);font-weight:600;}
 
 /* ── HERO ── */
-.hero {
+.hero{
   text-align:center;
-  padding:56px 32px 48px;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  margin-bottom:20px;
-  position:relative;overflow:hidden;
-  animation: fadeUp 0.6s ease both;
-}
-.hero::before {
-  content:'';
-  position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:280px;height:2px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-}
-
-.checkmark {
-  width:64px;height:64px;border-radius:50%;
-  background:var(--green2);
-  border:2px solid rgba(0,200,83,0.35);
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 20px;
-  font-size:28px;
-  animation: popIn 0.5s cubic-bezier(.2,1.4,.5,1) 0.2s both;
-}
-
-.hero-eyebrow {
-  font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;
-  color:var(--gold);margin-bottom:14px;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-}
-.hero-eyebrow::before,.hero-eyebrow::after {
-  content:'';display:block;width:32px;height:1px;background:rgba(249,168,37,0.35);
-}
-
-.hero h1 {
-  font-family:'Syne',sans-serif;
-  font-size:clamp(30px,5vw,44px);
-  font-weight:800;line-height:1.1;
-  color:#fff;margin-bottom:14px;
-}
-.hero h1 em { font-style:normal;color:var(--gold); }
-
-.hero-sub {
-  font-size:16px;color:var(--grey);line-height:1.7;
-  max-width:480px;margin:0 auto 32px;
-}
-
-/* timeline */
-.timeline {
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:0;border:1px solid var(--border);border-radius:12px;
-  overflow:hidden;margin-top:8px;
-}
-.tl-item {
-  padding:16px 14px;text-align:center;
-  border-right:1px solid var(--border);
-  background:rgba(255,255,255,0.02);
-}
-.tl-item:last-child{border-right:none;}
-.tl-time {
-  font-family:'Syne',sans-serif;font-size:12px;font-weight:700;
-  color:var(--gold);margin-bottom:6px;letter-spacing:0.5px;
-}
-.tl-label { font-size:12px;color:var(--grey);line-height:1.5; }
-
-/* ── SECTION SHARED ── */
-.section {
-  background:var(--card);
-  border:1px solid var(--border);
+  padding:40px 24px 30px;
+  background:var(--navy);
   border-radius:16px;
-  margin-bottom:16px;
-  overflow:hidden;
-  animation: fadeUp 0.6s ease both;
+  margin-bottom:18px;
+  position:relative;overflow:hidden;
 }
-.section-head {
-  padding:24px 28px 20px;
-  border-bottom:1px solid var(--border2);
-  display:flex;align-items:center;gap:14px;
+.hero::after{
+  content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,129,204,0.28),transparent 70%);pointer-events:none;
 }
-.section-icon {
-  width:40px;height:40px;border-radius:10px;
+.check{
+  width:56px;height:56px;border-radius:50%;
+  background:rgba(30,158,90,0.18);border:2px solid rgba(95,219,154,0.45);
+  color:#5FDB9A;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 18px;animation:popIn 0.5s cubic-bezier(.2,1.4,.5,1) 0.15s both;
+}
+.check .ico{width:26px;height:26px;stroke-width:3;}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);
+  color:#fff;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+  padding:7px 16px;border-radius:100px;margin-bottom:18px;
+}
+.hero h1{
+  font-size:clamp(26px,6vw,34px);font-weight:800;line-height:1.2;
+  color:#fff;margin-bottom:14px;position:relative;
+}
+.hero h1 span.accent{color:var(--primary-light);}
+.hero-sub{
+  font-size:15.5px;color:var(--on-dark-muted);line-height:1.65;
+  max-width:500px;margin:0 auto 20px;position:relative;
+}
+.plan-pill{
+  display:inline-flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:center;
+  font-size:13px;font-weight:600;color:var(--on-dark-muted);
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);
+  padding:7px 16px;border-radius:100px;margin-bottom:24px;position:relative;
+}
+.plan-pill b{color:#fff;font-weight:800;}
+.timeline{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border:1px solid rgba(255,255,255,0.14);border-radius:12px;overflow:hidden;position:relative;
+}
+.tl-item{padding:14px 10px;text-align:center;border-right:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.03);}
+.tl-item:last-child{border-right:none;}
+.tl-time{font-size:13px;font-weight:800;color:var(--primary-light);margin-bottom:4px;}
+.tl-label{font-size:12px;color:var(--on-dark-muted);line-height:1.45;}
+
+/* ── CARDS ── */
+.card{
+  background:var(--white);border:1px solid var(--border);border-radius:16px;
+  box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden;
+  animation:fadeUp 0.45s ease both;
+}
+.card-head{padding:22px 24px 18px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:14px;}
+.card-icon{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
-  font-size:18px;flex-shrink:0;
+  background:var(--blue-wash);color:var(--blue-dark);
 }
-.section-icon.blue { background:rgba(21,101,192,0.15);border:1px solid rgba(21,101,192,0.25); }
-.section-icon.gold { background:rgba(249,168,37,0.12);border:1px solid rgba(249,168,37,0.25); }
-.section-icon.teal { background:rgba(0,151,167,0.12);border:1px solid rgba(0,151,167,0.25); }
-.section-icon.green{ background:rgba(0,200,83,0.10);border:1px solid rgba(0,200,83,0.25); }
+.card-icon.green{background:var(--success-wash);color:var(--success);}
+.eyebrow{font-size:11.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);margin-bottom:2px;}
+.card-title{font-size:clamp(18px,4vw,20px);font-weight:800;color:var(--navy);line-height:1.3;}
+.card-sub{font-size:14px;color:var(--muted);margin-top:4px;line-height:1.55;}
+.card-body{padding:22px 24px;}
 
-.section-title {
-  font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:#fff;
+/* ── GATES ── */
+.gate-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;}
+.gate{background:var(--wash);border:1px solid var(--border);border-radius:12px;padding:12px 12px 11px;}
+.gate-n{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10.5px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:var(--success);margin-bottom:5px;
 }
-.section-sub { font-size:13px;color:var(--grey);margin-top:3px;line-height:1.5; }
+.gate-n::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--success);}
+.gate-name{font-size:13.5px;font-weight:800;color:var(--navy);margin-bottom:2px;}
+.gate-what{font-size:12px;color:var(--muted);line-height:1.45;}
 
-.section-body { padding:24px 28px; }
+.notice{
+  background:var(--warning-wash);border:1px solid #F2DDA6;border-left:4px solid var(--warning);
+  border-radius:12px;padding:16px 18px;
+}
+.notice-label{font-size:11.5px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--warning-ink);margin-bottom:10px;}
+.truth{display:flex;gap:10px;font-size:14px;color:var(--body);line-height:1.6;margin-bottom:9px;}
+.truth:last-child{margin-bottom:0;}
+.truth b{color:var(--navy);}
+.truth-n{color:var(--warning-ink);font-weight:800;flex-shrink:0;}
 
 /* ── TOOLS ── */
-.tool-card {
-  background:rgba(255,255,255,0.025);
-  border:1px solid var(--border2);
-  border-radius:12px;
-  padding:20px;
-  margin-bottom:12px;
-  transition:border-color 0.2s;
+.tool{background:var(--wash);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:12px;}
+.tool:last-child{margin-bottom:0;}
+.tool-name{font-size:17px;font-weight:800;color:var(--navy);margin-bottom:8px;}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+.tag{font-size:11px;font-weight:700;padding:4px 11px;border-radius:100px;background:var(--blue-wash);color:var(--blue-dark);}
+.tag.new{background:var(--success-wash);color:var(--success);}
+.tool-desc{font-size:14px;color:var(--body);line-height:1.65;margin-bottom:14px;}
+.why{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:0 10px 10px 0;padding:12px 14px;margin-bottom:16px;}
+.why-label{font-size:11px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue-dark);margin-bottom:4px;}
+.why p{font-size:13.5px;color:var(--muted);line-height:1.65;}
+.steps{display:flex;flex-direction:column;gap:9px;margin-bottom:18px;}
+.step{position:relative;padding-left:32px;min-height:22px;font-size:14px;color:var(--body);line-height:1.55;}
+.step::before{
+  content:attr(data-n);position:absolute;left:0;top:0;
+  width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;
+  font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:center;
 }
-.tool-card:last-child{margin-bottom:0;}
-.tool-card:hover{border-color:rgba(21,101,192,0.35);}
+.step b{color:var(--navy);}
 
-.tool-top {
-  display:flex;align-items:flex-start;justify-content:space-between;
-  gap:16px;margin-bottom:14px;
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  width:100%;min-height:52px;padding:14px 22px;
+  font-family:'Manrope',sans-serif;font-size:15px;font-weight:700;
+  border-radius:8px;text-decoration:none;cursor:pointer;border:none;transition:all 0.2s;
 }
-.tool-name {
-  font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;
-  margin-bottom:4px;
-}
-.tool-tag {
-  display:inline-block;font-size:10px;font-weight:700;
-  letter-spacing:1px;text-transform:uppercase;
-  padding:3px 10px;border-radius:100px;flex-shrink:0;
-}
-.tool-tag.kit { background:rgba(21,101,192,0.15);color:#90CAF9;border:1px solid rgba(21,101,192,0.25); }
-.tool-tag.calc { background:rgba(0,151,167,0.12);color:#80DEEA;border:1px solid rgba(0,151,167,0.2); }
-.tool-tag.roi  { background:rgba(249,168,37,0.1);color:#FFE082;border:1px solid rgba(249,168,37,0.25); }
-
-.tool-desc {
-  font-size:13px;color:var(--grey);line-height:1.7;margin-bottom:16px;
-}
-
-.tool-why {
-  background:rgba(21,101,192,0.06);
-  border-left:2px solid var(--blue);
-  padding:10px 14px;border-radius:0 8px 8px 0;
-  margin-bottom:16px;
-}
-.tool-why-label {
-  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--blue2);margin-bottom:4px;
-}
-.tool-why p { font-size:13px;color:#8BAAD0;line-height:1.65; }
-
-.tool-how {
-  display:flex;flex-direction:column;gap:6px;margin-bottom:16px;
-}
-.tool-how-item {
-  display:flex;gap:10px;align-items:flex-start;
-  font-size:13px;color:var(--grey);line-height:1.5;
-}
-.tool-how-item::before {
-  content:attr(data-n);
-  width:20px;height:20px;border-radius:50%;
-  background:rgba(21,101,192,0.15);border:1px solid rgba(21,101,192,0.25);
-  color:#90CAF9;font-size:11px;font-weight:700;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;margin-top:1px;
-}
-
-.dl-btn {
-  display:inline-flex;align-items:center;gap:8px;
-  padding:12px 20px;border-radius:8px;
-  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;
-  text-decoration:none;transition:all 0.2s;cursor:pointer;
-  border:none;width:100%;justify-content:center;
-}
-.dl-btn.primary {
-  background:var(--blue);color:#fff;
-  box-shadow:0 4px 16px rgba(21,101,192,0.3);
-}
-.dl-btn.primary:hover { background:var(--blue2);transform:translateY(-1px); }
-.dl-btn.outline {
-  background:transparent;color:var(--teal);
-  border:1px solid rgba(0,151,167,0.35);
-}
-.dl-btn.outline:hover { background:rgba(0,151,167,0.08); }
-.dl-btn.muted {
-  background:rgba(249,168,37,0.08);color:var(--gold);
-  border:1px solid rgba(249,168,37,0.2);
-}
+.btn .ico{width:18px;height:18px;}
+.btn.primary{background:var(--blue);color:#fff;}
+.btn.primary:hover{background:var(--blue-dark);}
+.btn.outline{background:var(--white);color:var(--blue-dark);border:1.5px solid var(--blue);}
+.btn.outline:hover{background:var(--blue-wash);}
 
 /* ── LEAD PREVIEW ── */
-.lead-preview {
-  background:rgba(255,255,255,0.02);
-  border:1px solid var(--border2);
-  border-radius:12px;overflow:hidden;
-  margin-bottom:20px;
-}
-.lp-header {
-  background:rgba(0,200,83,0.08);
-  border-bottom:1px solid rgba(0,200,83,0.15);
-  padding:12px 18px;
-  display:flex;align-items:center;gap:10px;
-}
-.lp-dot { width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0; }
-.lp-label { font-size:12px;font-weight:700;color:var(--green);letter-spacing:0.5px; }
-.lp-body { padding:18px;font-size:13px;color:var(--grey);line-height:2; }
-.lp-field { display:flex;gap:8px; }
-.lp-key { color:var(--muted);min-width:140px;flex-shrink:0; }
-.lp-val { color:var(--white); }
-.lp-section-label {
-  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:var(--muted);margin:14px 0 6px;
-}
+.sample-label{font-size:11.5px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.email{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:18px;background:var(--white);}
+.email-head{background:var(--navy);padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.email-title{color:#fff;font-size:13.5px;font-weight:800;}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;padding:4px 11px;border-radius:100px;background:rgba(30,158,90,0.2);color:#5FDB9A;}
+.status::before{content:'';width:6px;height:6px;border-radius:50%;background:#5FDB9A;}
+.email-body{padding:4px 18px 16px;font-size:13.5px;}
+.group{font-size:10.5px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin:16px 0 6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.row{display:flex;gap:10px;padding:5px 0;border-bottom:1px dashed var(--border);line-height:1.5;}
+.row:last-child{border-bottom:none;}
+.k{color:var(--muted);min-width:168px;flex-shrink:0;}
+.v{color:var(--navy);font-weight:600;}
+.v.flag{color:var(--warning-ink);background:var(--warning-wash);padding:0 6px;border-radius:4px;}
+.only-chip{font-size:10px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;padding:2px 9px;border-radius:100px;background:var(--blue-wash);color:var(--blue-dark);}
 
-.lead-tip {
-  background:rgba(239,83,80,0.07);
-  border:1px solid rgba(239,83,80,0.18);
-  border-radius:10px;padding:14px 18px;
-  display:flex;align-items:flex-start;gap:12px;
+/* The Package-Matched block. Full on Package-Matched, locked on Verified. */
+.t2{position:relative;border-radius:10px;}
+body.tier-1 .t2-rows{filter:blur(4px);opacity:0.5;user-select:none;pointer-events:none;}
+.t2-lock{display:none;}
+body.tier-1 .t2-lock{display:flex;position:absolute;inset:26px 0 0;align-items:center;justify-content:center;padding:8px;}
+.t2-lock span{
+  background:var(--navy);color:#fff;font-size:13px;font-weight:600;line-height:1.5;text-align:center;
+  padding:10px 16px;border-radius:10px;max-width:320px;box-shadow:0 8px 24px rgba(0,27,61,0.25);
 }
-.lead-tip-icon { font-size:20px;flex-shrink:0;margin-top:1px; }
-.lead-tip-text { font-size:13px;color:#EF9A9A;line-height:1.65; }
-.lead-tip-text strong { color:#EF5350; }
+.t2-lock a{color:var(--primary-light);font-weight:800;}
 
-/* ── VIDEO PLACEHOLDER ── */
-.video-placeholder {
-  background:rgba(255,255,255,0.02);
-  border:2px dashed rgba(21,101,192,0.25);
-  border-radius:12px;
-  padding:48px 24px;
-  text-align:center;margin-bottom:0;
-}
-.vp-icon { font-size:40px;margin-bottom:16px; }
-.vp-title { font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:8px; }
-.vp-sub { font-size:13px;color:var(--muted);line-height:1.65;max-width:380px;margin:0 auto; }
-.vp-badge {
-  display:inline-block;margin-top:16px;
-  background:rgba(21,101,192,0.12);border:1px solid rgba(21,101,192,0.25);
-  color:var(--grey);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
-  padding:5px 14px;border-radius:100px;
-}
+.alert{background:var(--negative-wash);border:1px solid #F3CFCA;border-left:4px solid var(--negative);border-radius:12px;padding:15px 18px;display:flex;gap:12px;}
+.alert .ico{color:var(--negative);margin-top:2px;}
+.alert-text{font-size:14px;color:var(--body);line-height:1.65;}
+.alert-text strong{color:var(--negative);}
+
+/* ── UPGRADE ── */
+.card.upgrade{border:2px solid var(--blue);box-shadow:0 10px 30px rgba(0,129,204,0.12);}
+.upgrade .card-head{background:var(--navy);border-bottom:none;}
+.upgrade .card-icon{background:rgba(127,196,240,0.15);color:var(--primary-light);}
+.upgrade .eyebrow{color:var(--primary-light);}
+.upgrade .card-title{color:#fff;}
+.upgrade .card-sub{color:var(--on-dark-muted);}
+.up-lead{font-size:15px;color:var(--body);line-height:1.7;margin-bottom:18px;}
+.up-lead b{color:var(--navy);}
+
+.compare{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:18px;}
+.c-row{display:grid;grid-template-columns:1.35fr 1fr 1fr;border-bottom:1px solid var(--border);}
+.c-row:last-child{border-bottom:none;}
+.c-row>div{padding:11px 12px;font-size:13px;line-height:1.45;color:var(--muted);}
+.c-row>div:first-child{color:var(--navy);font-weight:600;}
+.c-row>div:nth-child(3){background:var(--blue-wash);color:var(--navy);font-weight:600;}
+.c-head>div{font-size:11px !important;font-weight:800 !important;letter-spacing:0.06em;text-transform:uppercase;}
+.c-head>div:nth-child(2){color:var(--muted) !important;}
+.c-head>div:nth-child(3){background:var(--blue) !important;color:#fff !important;}
+.c-price{font-size:17px !important;font-weight:800 !important;color:var(--navy) !important;}
+.c-row .yes{color:var(--success) !important;font-weight:800 !important;}
+.c-row .no{color:#9AA7B4 !important;}
+.c-row.key>div:first-child{color:var(--blue-dark);}
+
+.value{background:var(--wash);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:18px;}
+.value-label{font-size:11.5px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.value-item{display:flex;gap:10px;font-size:14px;color:var(--body);line-height:1.65;}
+.value-item + .value-item{margin-top:10px;}
+.value-item .ico{color:var(--blue);margin-top:3px;width:18px;height:18px;}
+.value-item b{color:var(--navy);}
+.up-foot{font-size:12.5px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.55;}
+
+.card.onplan{border:1.5px solid #BFE5CF;}
+.onplan-item{display:flex;gap:10px;font-size:14.5px;color:var(--body);line-height:1.6;}
+.onplan-item + .onplan-item{margin-top:11px;}
+.onplan-item .ico{color:var(--success);margin-top:3px;width:18px;height:18px;stroke-width:2.6;}
+.onplan-item b{color:var(--navy);}
+
+/* ── VIDEO ── */
+.video-empty{background:var(--wash);border:2px dashed #C7D5E3;border-radius:12px;padding:40px 22px;text-align:center;}
+.play{width:56px;height:56px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;}
+.play .ico{width:22px;height:22px;fill:currentColor;stroke:none;margin-left:3px;}
+.video-empty h3{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:6px;}
+.video-empty p{font-size:14px;color:var(--muted);line-height:1.65;max-width:420px;margin:0 auto;}
+.soon{display:inline-block;margin-top:14px;font-size:11px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;padding:5px 13px;border-radius:100px;background:var(--blue-wash);color:var(--blue-dark);}
+.video-frame{position:relative;width:100%;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+
+/* ── REPORT ── */
+.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.report{background:var(--wash);border:1px solid var(--border);border-radius:12px;padding:16px;}
+.report-label{font-size:11.5px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;}
+.report-text{font-size:13.5px;color:var(--body);line-height:1.7;}
+.report-note{margin-top:12px;padding:13px 16px;background:var(--blue-wash);border-radius:10px;font-size:14px;color:var(--body);line-height:1.6;}
+.report-note strong{color:var(--navy);}
 
 /* ── FOOTER ── */
-.footer-cta {
-  background:linear-gradient(135deg,rgba(21,101,192,0.1),rgba(21,101,192,0.04));
-  border:1px solid rgba(21,101,192,0.25);
-  border-radius:16px;padding:32px 28px;
-  text-align:center;margin-top:8px;
-}
-.footer-cta h3 {
-  font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:8px;
-}
-.footer-cta p { font-size:14px;color:var(--grey);line-height:1.7;margin-bottom:20px; }
-.wa-btn {
-  display:inline-flex;align-items:center;gap:10px;
-  background:#25D366;color:#fff;
-  font-size:15px;font-weight:700;
-  padding:14px 28px;border-radius:10px;
-  text-decoration:none;transition:all 0.2s;
-  box-shadow:0 6px 20px rgba(37,211,102,0.25);
-}
-.wa-btn:hover { transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,0.35); }
+.footer{background:var(--navy);border-radius:16px;padding:30px 24px;text-align:center;margin-top:4px;}
+.footer h3{font-size:19px;font-weight:800;color:#fff;margin-bottom:8px;}
+.footer p{font-size:14.5px;color:var(--on-dark-muted);line-height:1.65;max-width:460px;margin:0 auto 20px;}
+.footer .btn{max-width:360px;margin:0 auto;}
+.sign{margin-top:22px;font-size:12px;color:#8FA6BF;}
 
-/* ── ANIMATIONS ── */
-@keyframes fadeUp {
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;transform:translateY(0);}
-}
-@keyframes popIn {
-  from{opacity:0;transform:scale(0.4);}
-  to{opacity:1;transform:scale(1);}
-}
-.section:nth-child(2){animation-delay:0.1s;}
-.section:nth-child(3){animation-delay:0.2s;}
-.section:nth-child(4){animation-delay:0.3s;}
-.section:nth-child(5){animation-delay:0.4s;}
-.section:nth-child(6){animation-delay:0.5s;}
+.hidden{display:none !important;}
 
-/* ── MOBILE ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+@keyframes popIn{from{opacity:0;transform:scale(0.4);}to{opacity:1;transform:scale(1);}}
+
 @media(max-width:600px){
-  .wrap{padding:20px 14px 60px;}
-  .hero{padding:36px 18px 32px;}
+  .wrap{padding:14px 14px 56px;}
+  .hero{padding:32px 18px 24px;}
   .timeline{grid-template-columns:1fr 1fr;}
   .tl-item:nth-child(2){border-right:none;}
-  .tl-item:nth-child(3){border-top:1px solid var(--border);}
-  .tl-item:nth-child(4){border-top:1px solid var(--border);border-right:none;}
-  .section-body,.section-head{padding:18px;}
-  .tool-top{flex-direction:column;gap:8px;}
-  .lp-key{min-width:110px;}
+  .tl-item:nth-child(3),.tl-item:nth-child(4){border-top:1px solid rgba(255,255,255,0.14);}
+  .card-head,.card-body{padding:18px;}
+  .gate-grid{grid-template-columns:1fr 1fr;}
+  .tool{padding:16px;}
+  .k{min-width:122px;}
+  .email-body{font-size:13px;}
+  .c-row{grid-template-columns:1.15fr 1fr 1fr;}
+  .c-row>div{padding:10px 8px;font-size:12px;}
+  .report-grid{grid-template-columns:1fr;}
 }
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
 </style>
 </head>
 <body>
+
+<!-- Icon set, stroked to match the 8-Gate page. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+    <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m22 8-6 4 6 4V8z"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  </defs>
+</svg>
+
 <div class="wrap">
+
+<!-- ══ BRAND BAR ══ -->
+<div class="brandbar">
+  <svg viewBox="0 0 100 100" aria-hidden="true">
+    <rect width="100" height="100" rx="18" fill="#001B3D"/>
+    <rect x="20.5" y="18" width="41" height="10.8" fill="#FFFFFF"/>
+    <rect x="48.6" y="18" width="13" height="64.1" fill="#FFFFFF"/>
+    <circle cx="71.6" cy="26.3" r="7.9" fill="#0081CC"/>
+  </svg>
+  <div>
+    <div class="brandbar-name">Tubalcain Ads Enterprise</div>
+    <div class="brandbar-sub">Partner onboarding</div>
+  </div>
+</div>
 
 <!-- ══ HERO ══ -->
 <div class="hero">
-  <div class="checkmark">✓</div>
-  <div class="hero-eyebrow">Onboarding Complete</div>
-  <h1>You Are Now <em>Inside</em><br>the Tubalcain System.</h1>
-  <p class="hero-sub">Your campaign is being built. While you wait, set up every tool below  they are the difference between closing 10% of your leads and closing 38%.</p>
+  <div class="check"><svg class="ico"><use href="#i-check"/></svg></div>
+  <div class="badge">Onboarding Complete</div>
+  <h1><span id="heroGreeting">You Are Now</span> <span class="accent">Inside</span><br>the Tubalcain System.</h1>
+  <p class="hero-sub">Your campaign is being built. While it is, set up the three tools below. Every buyer we send you has already passed the 8-Gate qualification, and these tools are how you turn that head start into signed installations.</p>
+
+  <div class="plan-pill" id="planPill">Your plan: <b id="planName">Verified Buyer</b> <span id="planPrice"></span></div>
 
   <div class="timeline">
-    <div class="tl-item">
-      <div class="tl-time">Now</div>
-      <div class="tl-label">Set up your tools below</div>
+    <div class="tl-item"><div class="tl-time">Now</div><div class="tl-label">Set up your tools below</div></div>
+    <div class="tl-item"><div class="tl-time">6 Hours</div><div class="tl-label">Setup confirmation sent</div></div>
+    <div class="tl-item"><div class="tl-time">24 to 48 hrs</div><div class="tl-label">Your ads go live</div></div>
+    <div class="tl-item"><div class="tl-time">2 to 3 Days</div><div class="tl-label">First qualified buyers arrive</div></div>
+  </div>
+</div>
+
+<!-- ══ THE GATES ══ -->
+<div class="card">
+  <div class="card-head">
+    <div class="card-icon green"><svg class="ico"><use href="#i-shield"/></svg></div>
+    <div>
+      <div class="eyebrow">Before they reach you</div>
+      <div class="card-title">What Every Buyer Has Already Done</div>
+      <div class="card-sub">Every buyer answers nine questions and clears every one of these checks before they reach your WhatsApp.</div>
     </div>
-    <div class="tl-item">
-      <div class="tl-time">6 Hours</div>
-      <div class="tl-label">Setup confirmation sent</div>
+  </div>
+  <div class="card-body">
+    <div class="gate-grid">
+      <div class="gate"><div class="gate-n">Gate 1</div><div class="gate-name">Timeline Set</div><div class="gate-what">Funds available within 90 days</div></div>
+      <div class="gate"><div class="gate-n">Gate 2</div><div class="gate-name">ROI Verified</div><div class="gate-what">Typed in a monthly power spend of ₦30,000 or more</div></div>
+      <div class="gate"><div class="gate-n">Gate 3</div><div class="gate-name">Package Selected</div><div class="gate-what">Chose a package from your own price list</div></div>
+      <div class="gate"><div class="gate-n">Gate 4</div><div class="gate-name">Decision Maker</div><div class="gate-what">Owns the property or holds written permission</div></div>
+      <div class="gate"><div class="gate-n">Gate 5</div><div class="gate-name">Home Checked</div><div class="gate-what">Roof, shading and wiring reported</div></div>
+      <div class="gate"><div class="gate-n">Gate 6</div><div class="gate-name">Winnable</div><div class="gate-what">Has not chosen an installer or paid a deposit</div></div>
+      <div class="gate"><div class="gate-n">Gate 7</div><div class="gate-name">Location Matched</div><div class="gate-what">Inside your service area</div></div>
+      <div class="gate"><div class="gate-n">Gate 8</div><div class="gate-name">Pre-Warmed</div><div class="gate-what">Gave their WhatsApp and agreed to be contacted</div></div>
+      <div class="gate"><div class="gate-n">Gate 9</div><div class="gate-name">Payment Known</div><div class="gate-what">Told us how they plan to pay</div></div>
     </div>
-    <div class="tl-item">
-      <div class="tl-time">24–48 hrs</div>
-      <div class="tl-label">Your ads go live</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-time">2–3 Days</div>
-      <div class="tl-label">First qualified leads arrive</div>
+
+    <div class="notice">
+      <div class="notice-label">Three things to know before your first buyer</div>
+      <div class="truth"><span class="truth-n">1.</span><span><b>Some buyers are comparing quotes.</b> Gate 6 lets through buyers who hold another installer's quote but have not chosen or paid anyone. Your lead email says which ones, and Volume 2 has a script built for them.</span></div>
+      <div class="truth"><span class="truth-n">2.</span><span><b>The package is their choice, not a confirmed budget.</b> Say "you selected the Comfort package", never "your budget is confirmed". The first is true and a buyer cannot argue with it.</span></div>
+      <div class="truth"><span class="truth-n">3.</span><span><b>You know how they will pay before you call.</b> Full payment, part payment or a financing plan. Open with the right one and the price conversation gets much shorter.</span></div>
     </div>
   </div>
 </div>
 
 <!-- ══ TOOLS ══ -->
-<div class="section">
-  <div class="section-head">
-    <div class="section-icon gold">🛠</div>
+<div class="card">
+  <div class="card-head">
+    <div class="card-icon"><svg class="ico"><use href="#i-tool"/></svg></div>
     <div>
-      <div class="section-title">Your Closing Tools  Download All Three Now</div>
-      <div class="section-sub">These tools were built specifically to help you convert our 8-gate qualified leads into paid installations.</div>
+      <div class="eyebrow">Do this now</div>
+      <div class="card-title">Your Closing Tools: Download All Three</div>
+      <div class="card-sub">Built around the 8-Gate system, so every figure your buyer has already seen carries straight into your conversation and your quotation.</div>
     </div>
   </div>
-  <div class="section-body">
+  <div class="card-body">
 
-    <!-- TOOL 1 -->
-    <div class="tool-card">
-      <div class="tool-top">
-        <div>
-          <div class="tool-name">Authority Close Kit  Volume 1</div>
-          <div class="tool-tag kit">Quotation Template</div>
-        </div>
+    <div class="tool">
+      <div class="tool-name">Authority Close Kit, Volume 1</div>
+      <div class="tags"><span class="tag">Quotation Template</span><span class="tag new">8-Gate Edition</span></div>
+      <div class="tool-desc">A professional solar proposal built to continue the buyer's assessment rather than start over. It opens with what their assessment confirmed, names the package they were matched to, lays out one payment path that matches how they told us they will pay, and includes a comparison page for buyers weighing another installer's quote.</div>
+      <div class="why">
+        <div class="why-label">Why it was built</div>
+        <p>Most installers lose deals not because the price is too high but because the quotation looks unprofessional, or contradicts what the buyer was already shown. A homeowner spending millions on solar needs your document to agree with their own numbers down to the naira. Volume 1 makes that automatic.</p>
       </div>
-      <div class="tool-desc">
-        A professional solar quotation template pre-formatted for Nigerian installers. Covers system size, component breakdown, total cost, payment terms, and warranty details  everything a homeowner needs to see before saying yes.
+      <div class="steps">
+        <div class="step" data-n="1">Set it up once: your business name, logo, bank details, and your warranty period so it matches what you gave us at onboarding.</div>
+        <div class="step" data-n="2">Read page 1, then delete it. It shows exactly which part of the lead email fills each section.</div>
+        <div class="step" data-n="3">For each buyer, <b>keep only the payment path that matches their payment method</b> and delete the other two.</div>
+        <div class="step" data-n="4">If the lead says they hold another installer's quote, keep the comparison page. Otherwise delete it.</div>
+        <div class="step" data-n="5">Send it as a PDF the same day, then follow it with a short voice note walking through their three key numbers.</div>
       </div>
-      <div class="tool-why">
-        <div class="tool-why-label">Why it was built</div>
-        <p>Most installers lose deals not because the price is too high but because the quotation looks unprofessional or incomplete. A homeowner spending ₦2M–₦7M on solar needs to feel confident in the business they are giving that money to. Volume 1 makes your quotation look as serious as your service.</p>
-      </div>
-      <div class="tool-how">
-        <div class="tool-how-item" data-n="1">Download and save the template to your phone and laptop.</div>
-        <div class="tool-how-item" data-n="2">Fill in your business name, logo, and contact details once  save it as your master template.</div>
-        <div class="tool-how-item" data-n="3">After the site visit, use the Solar Load Calculator output to fill in the system size and component details.</div>
-        <div class="tool-how-item" data-n="4">Send the completed quotation to the homeowner within 24 hours of the site visit  speed signals professionalism.</div>
-      </div>
-      <a href="https://docs.google.com/document/d/1dDwd3fgAjDoeaeFkoNqNmtzxnn5TyeZu/export?format=docx" target="_blank" class="dl-btn primary">
-        ⬇ Download Authority Close Kit Vol. 1
-      </a>
+      <a href="#" id="kitVol1Link" target="_blank" rel="noopener" class="btn primary"><svg class="ico"><use href="#i-download"/></svg>Download Volume 1 · Word file</a>
     </div>
 
-    <!-- TOOL 2 -->
-    <div class="tool-card">
-      <div class="tool-top">
-        <div>
-          <div class="tool-name">Authority Close Kit  Volume 2</div>
-          <div class="tool-tag kit">WhatsApp Script</div>
-        </div>
+    <div class="tool">
+      <div class="tool-name">Authority Close Kit, Volume 2</div>
+      <div class="tags"><span class="tag">WhatsApp Closing Scripts</span><span class="tag new">8-Gate Edition</span></div>
+      <div class="tool-desc">Word-for-word WhatsApp messages from the first call to the deposit. Ten messages, a payment playbook for each way a buyer can pay, a script for buyers who are comparing quotes, a site-visit script for homes with a flagged roof or wiring, and a follow-up sequence for buyers who go quiet.</div>
+      <div class="why">
+        <div class="why-label">Why it was built</div>
+        <p>Qualified buyers are usually lost in the first three messages, not because the buyer is wrong but because the reply is slow, generic, or asks for something they already gave. Volume 2 gives you the exact words for every stage, using the buyer's own figures, so you sound like the installer who read their assessment.</p>
       </div>
-      <div class="tool-desc">
-        A word-for-word WhatsApp conversation guide for the first contact after a lead arrives. Every message, every objection, and every follow-up scripted out  from "Hi, I just received your enquiry" all the way to "Shall we book the site visit?"
+      <div class="steps">
+        <div class="step" data-n="1">Save it on your phone so it is open the moment a lead arrives.</div>
+        <div class="step" data-n="2">Read pages 2 to 5 once before your first buyer. They explain the gates, the two plans, and every field in your lead email.</div>
+        <div class="step" data-n="3"><b>Call within 5 minutes</b>, then send Message 1 whether or not they pick up.</div>
+        <div class="step" data-n="4">Check the buyer's payment method before you write anything about price. The playbook tells you which close to send.</div>
+        <div class="step" data-n="5">If the buyer is comparing quotes, send Message 8 within the first hour.</div>
       </div>
-      <div class="tool-why">
-        <div class="tool-why-label">Why it was built</div>
-        <p>Most solar installers lose qualified leads in the first 3 messages  not because the lead is bad but because the response is too generic or too slow. Volume 2 gives you the exact words to say at every stage of the WhatsApp conversation so the lead never goes cold and you never lose a deal because of how you responded.</p>
-      </div>
-      <div class="tool-how">
-        <div class="tool-how-item" data-n="1">Download and save to your phone so it is open the moment a lead arrives in your WhatsApp.</div>
-        <div class="tool-how-item" data-n="2">Read the first message script before you type anything  not after.</div>
-        <div class="tool-how-item" data-n="3">Personalise the lead's name and city in the message before sending.</div>
-        <div class="tool-how-item" data-n="4">Follow each phase in order: Welcome → Trust → Qualification → Site Visit booking.</div>
-      </div>
-      <a href="https://docs.google.com/document/d/1ezbkd5AYH3Yg9vGmHeabhMg7zwEELOlK/export?format=docx" target="_blank" class="dl-btn primary">
-        ⬇ Download Authority Close Kit Vol. 2
-      </a>
+      <a href="#" id="kitVol2Link" target="_blank" rel="noopener" class="btn primary"><svg class="ico"><use href="#i-download"/></svg>Download Volume 2 · Word file</a>
     </div>
 
-    <!-- TOOL 3 -->
-    <div class="tool-card">
-      <div class="tool-top">
-        <div>
-          <div class="tool-name">Solar Load Calculator</div>
-          <div class="tool-tag calc">Web Tool</div>
-        </div>
+    <div class="tool">
+      <div class="tool-name">Solar Load Calculator</div>
+      <div class="tags"><span class="tag">Web Tool</span></div>
+      <div class="tool-desc">A web tool that turns a homeowner's list of appliances into a recommended system size. Use it when you confirm a buyer's package before quoting, and on site visits when a buyer adds appliances you need to account for.</div>
+      <div class="why">
+        <div class="why-label">Why it was built</div>
+        <p>Homeowners do not trust verbal estimates. When the system size comes from their own appliances, worked out in front of them, the number belongs to them rather than to you, and the argument about whether they need something smaller goes away.</p>
       </div>
-      <div class="tool-desc">
-        A live web-based tool that calculates the exact solar system size a homeowner needs based on their appliances and usage. Gives you a professional, data-backed recommendation during or after the first site visit.
+      <div class="steps">
+        <div class="step" data-n="1">Bookmark it on your phone now. You will want it on site visits.</div>
+        <div class="step" data-n="2" id="calcStepTier">On Verified Buyer, use it when a buyer sends their appliance list, to confirm the package they chose is the right size.</div>
+        <div class="step" data-n="3">If the size moves, show them why before it appears in a quotation. An increase they were walked through gets accepted. One they discover in a PDF does not.</div>
       </div>
-      <div class="tool-why">
-        <div class="tool-why-label">Why it was built</div>
-        <p>Homeowners do not trust verbal estimates. When you show them a calculated system recommendation based on their actual appliances  not a guess  the decision becomes logical, not emotional. It reduces price objections by 60% because the number is justified.</p>
-      </div>
-      <div class="tool-how">
-        <div class="tool-how-item" data-n="1">Bookmark the link on your phone right now  you need it accessible during site visits.</div>
-        <div class="tool-how-item" data-n="2">During the site visit, ask the homeowner to list their major appliances with you.</div>
-        <div class="tool-how-item" data-n="3">Enter the appliances into the calculator and show them the result on your phone screen.</div>
-        <div class="tool-how-item" data-n="4">Use the output in your quotation to justify the system size and price.</div>
-      </div>
-      <a href="https://tubalcainmy.github.io/The-ABC-Solar-load-Calculator/" target="_blank" class="dl-btn outline">
-        🔖 Bookmark the Solar Load Calculator
-      </a>
-    </div>
-
-    <!-- TOOL 4  ROI Calculator -->
-    <div class="tool-card">
-      <div class="tool-top">
-        <div>
-          <div class="tool-name">ROI Calculator  Personalised for You</div>
-          <div class="tool-tag roi">Coming to Your WhatsApp</div>
-        </div>
-      </div>
-      <div class="tool-desc">
-        A personalised ROI report tool that shows homeowners exactly how much money they will save over 20 years based on their current energy spend, system size, and battery type. Built with your business WhatsApp number embedded so homeowners contact you directly.
-      </div>
-      <div class="tool-why">
-        <div class="tool-why-label">Why it is personalised</div>
-        <p>Unlike the other tools, the ROI Calculator needs to be customised with your specific WhatsApp number before it is sent to you. This ensures every homeowner who uses it contacts you directly  not a generic number. Mystery will send your personalised version to your WhatsApp within 24 hours of your campaign going live.</p>
-      </div>
-      <div style="background:rgba(249,168,37,0.07);border:1px solid rgba(249,168,37,0.2);border-radius:8px;padding:14px 16px;margin-top:4px;">
-        <div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">What to do</div>
-        <div style="font-size:13px;color:#C8A84B;line-height:1.65;">Nothing right now. Mystery will send your personalised ROI Calculator link directly to your WhatsApp <strong style="color:var(--gold);">within 24 hours of your campaign going live.</strong> Keep an eye on your WhatsApp for a message from <strong style="color:var(--gold);">+234 802 923 4994.</strong></div>
-      </div>
+      <a href="#" id="calcLink" target="_blank" rel="noopener" class="btn outline"><svg class="ico"><use href="#i-link"/></svg>Open the Solar Load Calculator</a>
     </div>
 
   </div>
 </div>
 
 <!-- ══ LEAD PREVIEW ══ -->
-<div class="section">
-  <div class="section-head">
-    <div class="section-icon green">📲</div>
+<div class="card">
+  <div class="card-head">
+    <div class="card-icon"><svg class="ico"><use href="#i-inbox"/></svg></div>
     <div>
-      <div class="section-title">What Your Leads Look Like When They Arrive</div>
-      <div class="section-sub">Every qualified lead comes to your email first, then directly to your WhatsApp. Here is exactly what to expect.</div>
+      <div class="eyebrow">What you receive</div>
+      <div class="card-title">What Your Leads Look Like When They Arrive</div>
+      <div class="card-sub">Every qualified buyer comes to your email first, then straight to your WhatsApp. Here is exactly what you get.</div>
     </div>
   </div>
-  <div class="section-body">
+  <div class="card-body">
 
-    <div style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Sample email notification</div>
-    <div class="lead-preview">
-      <div class="lp-header">
-        <div class="lp-dot"></div>
-        <div class="lp-label">🔥 New Qualified Lead  green</div>
+    <div class="sample-label">Sample lead email</div>
+    <div class="email">
+      <div class="email-head">
+        <div class="email-title">New Qualified Buyer</div>
+        <div class="status">Green</div>
       </div>
-      <div class="lp-body">
-        <div class="lp-section-label">Personal Details</div>
-        <div class="lp-field"><span class="lp-key">Name:</span><span class="lp-val">Alexander</span></div>
-        <div class="lp-field"><span class="lp-key">WhatsApp:</span><span class="lp-val">0803 ••• ••••</span></div>
-        <div class="lp-field"><span class="lp-key">Location:</span><span class="lp-val">Lagos</span></div>
+      <div class="email-body">
+        <div class="group">Buyer</div>
+        <div class="row"><span class="k">Name</span><span class="v">Adaeze</span></div>
+        <div class="row"><span class="k">WhatsApp</span><span class="v">0803 ••• ••••</span></div>
+        <div class="row"><span class="k">Area</span><span class="v">Independence Layout, Enugu</span></div>
+        <div class="row"><span class="k">Property</span><span class="v">Owner</span></div>
 
-        <div class="lp-section-label">ROI Details</div>
-        <div class="lp-field"><span class="lp-key">Budget Range:</span><span class="lp-val">₦5m – ₦5.8m</span></div>
-        <div class="lp-field"><span class="lp-key">Payback Period:</span><span class="lp-val">4 years</span></div>
-        <div class="lp-field"><span class="lp-key">ROI in 20 years:</span><span class="lp-val">3,882%</span></div>
-        <div class="lp-field"><span class="lp-key">Monthly Savings:</span><span class="lp-val">₦101,250</span></div>
-        <div class="lp-field"><span class="lp-key">Current Energy Spend:</span><span class="lp-val">₦105,000/month</span></div>
+        <div class="group">Qualification</div>
+        <div class="row"><span class="k">Monthly power spend</span><span class="v">₦105,000</span></div>
+        <div class="row"><span class="k">Package selected</span><span class="v">₦3,980,000 · Comfort Home</span></div>
+        <div class="row"><span class="k">Funds available</span><span class="v">Within the next month</span></div>
+        <div class="row"><span class="k">Plans to pay</span><span class="v">Part payment, balance in instalments</span></div>
+        <div class="row"><span class="k">Other installers</span><span class="v flag">Holds a written quote and is comparing</span></div>
+        <div class="row"><span class="k">Home check</span><span class="v">Nothing flagged</span></div>
 
-        <div class="lp-section-label">Project Details</div>
-        <div class="lp-field"><span class="lp-key">System Size:</span><span class="lp-val">5 – 7.5 kVA</span></div>
-        <div class="lp-field"><span class="lp-key">Timeline:</span><span class="lp-val">2–4 weeks</span></div>
-        <div class="lp-field"><span class="lp-key">Has Installer:</span><span class="lp-val">No installer contacted yet</span></div>
+        <div class="group">Their ROI, as they saw it</div>
+        <div class="row"><span class="k">Payback period</span><span class="v">3 years</span></div>
+        <div class="row"><span class="k">Monthly savings</span><span class="v">₦101,250</span></div>
+        <div class="row"><span class="k">20-year savings</span><span class="v">₦215,594,066</span></div>
 
-        <div class="lp-section-label">Property Details</div>
-        <div class="lp-field"><span class="lp-key">Ownership:</span><span class="lp-val">Owner</span></div>
-        <div class="lp-field"><span class="lp-key">Building Type:</span><span class="lp-val">Duplex</span></div>
-        <div class="lp-field"><span class="lp-key">Electrical Issues:</span><span class="lp-val">None</span></div>
-        <div class="lp-field"><span class="lp-key">Roof Condition:</span><span class="lp-val">Solid</span></div>
-        <div class="lp-field"><span class="lp-key">Shading:</span><span class="lp-val">No shade</span></div>
+        <div class="t2">
+          <div class="group">Package match <span class="only-chip">Package-Matched only</span></div>
+          <div class="t2-rows">
+            <div class="row"><span class="k">Matched package</span><span class="v">Comfort Home · 5 kVA</span></div>
+            <div class="row"><span class="k">Appliances selected</span><span class="v">Fridge, 4 fans, TV, washing machine, 1 AC</span></div>
+            <div class="row"><span class="k">Total load</span><span class="v">2,050 W, needs 3.0 kVA</span></div>
+            <div class="row"><span class="k">Re-engagement</span><span class="v">30 days, if the buyer goes quiet</span></div>
+          </div>
+          <div class="t2-lock"><span>These rows arrive on Package-Matched Buyer. <a href="#upgrade">See the difference ↓</a></span></div>
+        </div>
       </div>
     </div>
 
-    <div class="lead-tip">
-      <div class="lead-tip-icon">⏱</div>
-      <div class="lead-tip-text">
-        <strong>Call within 1 hour. First installer wins.</strong><br>
-        Every lead you receive has not spoken to any other installer. The moment that lead hits your WhatsApp, the clock starts. Our data shows installers who call within 1 hour close <strong>38% of leads.</strong> Installers who call after 24 hours close under 10%. Do not wait until you are "ready"  call immediately with Authority Close Kit Vol. 1 open in front of you.
+    <div class="alert">
+      <svg class="ico"><use href="#i-clock"/></svg>
+      <div class="alert-text">
+        <strong>Call within 5 minutes. Speed still decides.</strong><br>
+        Every buyer has cleared every gate and has not chosen an installer or paid a deposit. Some are comparing quotes, and the lead email tells you which ones. The moment a lead lands, the clock starts: call first, then send Message 1 from Volume 2 with their own figures in it. Do not wait until you feel ready. The buyer is at their warmest the minute they see their result.
       </div>
     </div>
 
   </div>
 </div>
 
-<!-- ══ VIDEO PLACEHOLDER ══ -->
-<div class="section">
-  <div class="section-head">
-    <div class="section-icon blue">▶</div>
+<!-- ══ UPGRADE (Verified Buyer) ══ -->
+<div class="card upgrade" id="upgrade">
+  <div class="card-head">
+    <div class="card-icon"><svg class="ico"><use href="#i-zap"/></svg></div>
     <div>
-      <div class="section-title">Video Walkthrough  How to Use Every Tool</div>
-      <div class="section-sub">A full walkthrough of all three tools and the 1-hour response rule. Coming soon.</div>
+      <div class="eyebrow">Package-Matched Buyer</div>
+      <div class="card-title">The Rows You Could Not See</div>
+      <div class="card-sub">What Package-Matched Buyer adds to every lead, and why most of it pays for itself.</div>
     </div>
   </div>
-  <div class="section-body">
-    <div class="video-placeholder">
-      <div class="vp-icon">🎬</div>
-      <div class="vp-title">Training Video Coming Soon</div>
-      <div class="vp-sub">Mystery is recording a full walkthrough showing exactly how to use each tool from the moment a lead arrives to the moment a site visit is booked. You will be notified on WhatsApp the moment it goes live.</div>
-      <div class="vp-badge">Video being recorded  check back soon</div>
+  <div class="card-body">
+    <p class="up-lead">On <b>Verified Buyer</b>, your buyer chose a package bracket themselves, so your first job is collecting their appliance list and checking the bracket is the right size. On <b>Package-Matched Buyer</b>, they tick every appliance they want powered before they reach you. The system works out the load, matches it to one named package from your own price list, and they open your WhatsApp already asking for it.</p>
+
+    <div class="compare">
+      <div class="c-row c-head"><div></div><div>Verified Buyer</div><div>Package-Matched</div></div>
+      <div class="c-row"><div>Price per buyer</div><div class="c-price" id="cmpT1Price">₦5,000</div><div class="c-price" id="cmpT2Price">₦10,000</div></div>
+      <div class="c-row"><div>Passed every gate</div><div class="yes">✓</div><div class="yes">✓</div></div>
+      <div class="c-row"><div>Payment method and competitor status</div><div class="yes">✓</div><div class="yes">✓</div></div>
+      <div class="c-row"><div>Package</div><div>A bracket they chose</div><div>Matched to your price list from their load</div></div>
+      <div class="c-row"><div>Appliance list</div><div>You collect it</div><div>Arrives with the lead</div></div>
+      <div class="c-row"><div>Messages before the quotation</div><div>4</div><div>2</div></div>
+      <div class="c-row key"><div>30-day re-engagement on buyers who go quiet</div><div class="no">Not included</div><div class="yes">✓ Included</div></div>
+    </div>
+
+    <div class="value">
+      <div class="value-label">What the extra <span id="upDiff">₦5,000</span> buys</div>
+      <div class="value-item"><svg class="ico"><use href="#i-check"/></svg><span><b>A day off every deal.</b> The appliance back-and-forth is the slowest part of the whole close, and it is where buyers drift. On Package-Matched it is done before you say hello.</span></div>
+      <div class="value-item"><svg class="ico"><use href="#i-check"/></svg><span><b>A buyer who has already named your package.</b> They are not asking what you have. They are asking you to confirm the one they picked, which is a much shorter conversation.</span></div>
+      <div class="value-item"><svg class="ico"><use href="#i-check"/></svg><span><b>A second chance at every buyer who goes quiet.</b> Some qualified buyers stop replying after the first contact. On Package-Matched they are not written off: for 30 days we keep re-engaging them. A single installation brought back that way is worth many times the difference across your whole month.</span></div>
+    </div>
+
+    <a href="#" id="upgradeBtn" target="_blank" rel="noopener" class="btn primary">Move Me to Package-Matched Buyer <svg class="ico"><use href="#i-arrow"/></svg></a>
+    <div class="up-foot">Easiest before your ads go live, since your qualification page is being built right now.</div>
+  </div>
+</div>
+
+<!-- ══ ON PLAN (Package-Matched) ══ -->
+<div class="card onplan hidden" id="onPlan">
+  <div class="card-head">
+    <div class="card-icon green"><svg class="ico"><use href="#i-check"/></svg></div>
+    <div>
+      <div class="eyebrow" style="color:var(--success)">Your plan</div>
+      <div class="card-title">You Are on Package-Matched Buyer</div>
+      <div class="card-sub">Here is what that means for every lead you receive.</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="onplan-item"><svg class="ico"><use href="#i-check"/></svg><span><b>Your buyers arrive matched.</b> Their appliances are totalled and matched to one package from your own price list, and they open your WhatsApp already naming it.</span></div>
+    <div class="onplan-item"><svg class="ico"><use href="#i-check"/></svg><span><b>Skip the appliance list.</b> In Volume 2, go from Message 2 straight to the quotation. Messages 3 and 4 are already done for you.</span></div>
+    <div class="onplan-item"><svg class="ico"><use href="#i-check"/></svg><span><b>30-day re-engagement.</b> A buyer who goes quiet after first contact is not written off. We keep re-engaging them for 30 days.</span></div>
+  </div>
+</div>
+
+<!-- ══ VIDEO ══ -->
+<div class="card">
+  <div class="card-head">
+    <div class="card-icon"><svg class="ico"><use href="#i-video"/></svg></div>
+    <div>
+      <div class="eyebrow">Walkthrough</div>
+      <div class="card-title">How to Use Every Tool</div>
+      <div class="card-sub">From the moment a lead lands to the moment the deposit clears.</div>
+    </div>
+  </div>
+  <div class="card-body" id="videoBody">
+    <div class="video-empty">
+      <div class="play"><svg class="ico"><use href="#i-play"/></svg></div>
+      <h3>Training Video Coming Soon</h3>
+      <p>Mystery is recording a full walkthrough of all three tools, the lead email, and the first five minutes after a lead arrives. You will be told on WhatsApp the moment it goes live.</p>
+      <div class="soon">Being recorded</div>
     </div>
   </div>
 </div>
 
 <!-- ══ WEEKLY REPORT ══ -->
-<div class="section">
-  <div class="section-head">
-    <div class="section-icon teal">📊</div>
+<div class="card">
+  <div class="card-head">
+    <div class="card-icon"><svg class="ico"><use href="#i-chart"/></svg></div>
     <div>
-      <div class="section-title">Your Weekly Performance Report</div>
-      <div class="section-sub">Every Monday, automatically to your WhatsApp.</div>
+      <div class="eyebrow">Every Monday</div>
+      <div class="card-title">Your Weekly Performance Report</div>
+      <div class="card-sub">Sent automatically to your WhatsApp.</div>
     </div>
   </div>
-  <div class="section-body">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-      <div style="background:rgba(0,151,167,0.06);border:1px solid rgba(0,151,167,0.15);border-radius:10px;padding:16px;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:8px;">Leads Report</div>
-        <div style="font-size:13px;color:var(--grey);line-height:1.7;">Total leads delivered · Lead quality breakdown · City distribution</div>
+  <div class="card-body">
+    <div class="report-grid">
+      <div class="report">
+        <div class="report-label">Leads Report</div>
+        <div class="report-text">Buyers delivered · Green and flagged-home split · Areas they came from · Flagged leads, delivered but not billed</div>
       </div>
-      <div style="background:rgba(0,151,167,0.06);border:1px solid rgba(0,151,167,0.15);border-radius:10px;padding:16px;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:8px;">Ad Performance</div>
-        <div style="font-size:13px;color:var(--grey);line-height:1.7;">Ad spend used · Cost per lead · Budget remaining</div>
+      <div class="report">
+        <div class="report-label">Ad Performance</div>
+        <div class="report-text">Ad spend used · Cost per buyer · Budget remaining</div>
       </div>
     </div>
-    <div style="margin-top:12px;padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid var(--border2);border-radius:8px;font-size:13px;color:var(--muted);line-height:1.65;">
-      Reports arrive every <strong style="color:var(--white);">Monday morning</strong> automatically. If you have questions before then, WhatsApp Mystery directly at <strong style="color:var(--white);">+234 802 923 4994.</strong>
+    <div class="report-note">
+      Reports arrive every <strong>Monday morning</strong> automatically. If you have questions before then, WhatsApp Mystery directly at <strong id="mysteryNumberText">+234 802 923 4994</strong>.
     </div>
   </div>
 </div>
 
-<!-- ══ FOOTER CTA ══ -->
-<div class="footer-cta">
+<!-- ══ FOOTER ══ -->
+<div class="footer">
   <h3>Questions Before Your Campaign Goes Live?</h3>
-  <p>Message Mystery directly on WhatsApp  responses within 2 hours during business hours. Have your onboarding form confirmation ready so Mystery knows your campaign details.</p>
-  <a href="https://wa.me/2348029234994?text=Hi%20Mystery%2C%20I%20just%20completed%20my%20onboarding%20form%20and%20have%20a%20question%20about%20my%20campaign." target="_blank" class="wa-btn">
-    💬 Message Mystery on WhatsApp
-  </a>
+  <p>Message Mystery directly on WhatsApp. Replies within 2 hours during business hours. Mention your business name so Mystery can pull up your campaign.</p>
+  <a href="#" id="footerWa" target="_blank" rel="noopener" class="btn primary"><svg class="ico"><use href="#i-chat"/></svg>Message Mystery on WhatsApp</a>
+  <div class="sign">Tubalcain Ads Enterprise · Warri, Delta State</div>
 </div>
 
 </div><!-- /wrap -->
+
+<script>
+(function(){
+  var C = PAGE_CONFIG;
+  var params = new URLSearchParams(window.location.search);
+
+  // ── Plan. Anything other than an explicit 2 is treated as Verified
+  // Buyer, so a missing or mistyped parameter shows the upgrade rather
+  // than hiding it.
+  var tier = params.get('tier') === '2' ? 2 : 1;
+  document.body.classList.add('tier-' + tier);
+
+  function naira(n){ return '₦' + Number(n).toLocaleString('en-NG'); }
+  function wa(num, text){ return 'https://wa.me/' + num + '?text=' + encodeURIComponent(text); }
+
+  // ── Optional greeting. textContent only, so nothing in the address
+  // can inject markup into the page.
+  var name = (params.get('name') || '').trim().replace(/[^A-Za-z .'-]/g, '').slice(0, 30);
+  if (name) document.getElementById('heroGreeting').textContent = name + ', You Are Now';
+
+  var planName = tier === 2 ? 'Package-Matched Buyer' : 'Verified Buyer';
+  var planPrice = tier === 2 ? C.tier2Price : C.tier1Price;
+  document.getElementById('planName').textContent = planName;
+  document.getElementById('planPrice').textContent = '· ' + naira(planPrice) + ' per buyer';
+
+  document.getElementById('cmpT1Price').textContent = naira(C.tier1Price);
+  document.getElementById('cmpT2Price').textContent = naira(C.tier2Price);
+  document.getElementById('upDiff').textContent = naira(C.tier2Price - C.tier1Price);
+
+  if (tier === 2) {
+    document.getElementById('upgrade').classList.add('hidden');
+    document.getElementById('onPlan').classList.remove('hidden');
+    document.getElementById('calcStepTier').textContent =
+      'On Package-Matched, your buyer\'s load is already worked out. Use it on site visits, and whenever a buyer adds appliances to their list.';
+  }
+
+  // ── Links, all from the config block.
+  document.getElementById('kitVol1Link').href = C.kitVol1Url;
+  document.getElementById('kitVol2Link').href = C.kitVol2Url;
+  document.getElementById('calcLink').href = C.loadCalculatorUrl;
+
+  document.getElementById('upgradeBtn').href = wa(C.mysteryWhatsapp,
+    'Hi Mystery, I just finished onboarding on Verified Buyer and I would like to move to Package-Matched Buyer before my campaign goes live.' +
+    (name ? ' My name is ' + name + '.' : ''));
+  document.getElementById('footerWa').href = wa(C.mysteryWhatsapp,
+    'Hi Mystery, I just completed my onboarding form and have a question about my campaign.' +
+    (name ? ' My name is ' + name + '.' : ''));
+
+  var n = C.mysteryWhatsapp;
+  if (/^234\d{10}$/.test(n)) {
+    document.getElementById('mysteryNumberText').textContent =
+      '+234 ' + n.slice(3,6) + ' ' + n.slice(6,9) + ' ' + n.slice(9);
+  }
+
+  // ── Walkthrough video. Converts an ordinary share link into an
+  // embeddable one, so the link can be pasted exactly as copied.
+  function embedUrl(url){
+    if (!url) return null;
+    var m;
+    if ((m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/|youtube\.com\/embed\/)([A-Za-z0-9_-]{6,})/)))
+      return 'https://www.youtube.com/embed/' + m[1] + '?rel=0';
+    if ((m = url.match(/loom\.com\/(?:share|embed)\/([A-Za-z0-9]+)/)))
+      return 'https://www.loom.com/embed/' + m[1];
+    if ((m = url.match(/vimeo\.com\/(?:video\/)?(\d+)/)))
+      return 'https://player.vimeo.com/video/' + m[1];
+    return null;
+  }
+  var vsl = (C.vslUrl || '').trim();
+  if (vsl) {
+    var body = document.getElementById('videoBody');
+    var src = embedUrl(vsl);
+    if (src) {
+      body.innerHTML = '<div class="video-frame"><iframe allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Tubalcain tools walkthrough"></iframe></div>';
+      body.querySelector('iframe').src = src;
+    } else {
+      body.innerHTML = '<a class="btn primary" target="_blank" rel="noopener">Watch the walkthrough</a>';
+      body.querySelector('a').href = vsl;
+    }
+  }
+})();
+</script>
 </body>
 </html>
